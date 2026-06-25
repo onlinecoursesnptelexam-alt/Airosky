@@ -906,23 +906,27 @@ RESPONSIVE
 
 .popup-box{
 
-grid-template-columns:1fr;
+    grid-template-columns:1fr;
 
     width:100%;
 
-    max-width:600px;
+    max-width:100%;
+
+    margin:0 auto;
+
+    border-radius:20px;
 
 }
 
 .popup-left{
 
-display:none;
+    display:none;
 
 }
 
 .popup-right{
 
-padding:35px 20px;
+    padding:30px 18px;
 
 }
 
