@@ -71,12 +71,14 @@ const menuClose = document.getElementById("menuClose");
 menuOpen.addEventListener("click", () => {
 
     mobileOverlay.classList.add("active");
+    document.body.classList.add("no-scroll");
 
 });
 
 menuClose.addEventListener("click", () => {
 
     mobileOverlay.classList.remove("active");
+    document.body.classList.remove("no-scroll");
 
 });
 
@@ -85,6 +87,7 @@ mobileOverlay.addEventListener("click", (e) => {
     if (e.target === mobileOverlay) {
 
         mobileOverlay.classList.remove("active");
+        document.body.classList.remove("no-scroll");
 
     }
 
@@ -97,6 +100,7 @@ document.querySelectorAll(".mobile-nav a").forEach(link => {
     link.addEventListener("click", () => {
 
         mobileOverlay.classList.remove("active");
+        document.body.classList.remove("no-scroll");
 
     });
 
@@ -109,6 +113,7 @@ document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
 
         mobileOverlay.classList.remove("active");
+        document.body.classList.remove("no-scroll");
 
     }
 
