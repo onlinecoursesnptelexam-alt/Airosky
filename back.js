@@ -68,17 +68,31 @@ const menuOpen = document.getElementById("menuOpen");
 
 const menuClose = document.getElementById("menuClose");
 
+const lockPageScroll = () => {
+
+    document.body.classList.add("no-scroll");
+    document.documentElement.classList.add("no-scroll");
+
+};
+
+const unlockPageScroll = () => {
+
+    document.body.classList.remove("no-scroll");
+    document.documentElement.classList.remove("no-scroll");
+
+};
+
 menuOpen.addEventListener("click", () => {
 
     mobileOverlay.classList.add("active");
-    document.body.classList.add("no-scroll");
+    lockPageScroll();
 
 });
 
 menuClose.addEventListener("click", () => {
 
     mobileOverlay.classList.remove("active");
-    document.body.classList.remove("no-scroll");
+    unlockPageScroll();
 
 });
 
@@ -87,7 +101,7 @@ mobileOverlay.addEventListener("click", (e) => {
     if (e.target === mobileOverlay) {
 
         mobileOverlay.classList.remove("active");
-        document.body.classList.remove("no-scroll");
+        unlockPageScroll();
 
     }
 
@@ -100,7 +114,7 @@ document.querySelectorAll(".mobile-nav a").forEach(link => {
     link.addEventListener("click", () => {
 
         mobileOverlay.classList.remove("active");
-        document.body.classList.remove("no-scroll");
+        unlockPageScroll();
 
     });
 
@@ -113,7 +127,7 @@ document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
 
         mobileOverlay.classList.remove("active");
-        document.body.classList.remove("no-scroll");
+        unlockPageScroll();
 
     }
 

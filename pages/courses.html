@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="./courses.css">
+
+</head>
+<body>
+
+<!-- Navbar Start -->
+<header class="navbar">
+
+    <div class="container nav-container">
+
+        <!-- Logo Area -->
+        <a href="#" class="logo-box">
+
+            <img src="/logo.png" alt="AiRosKy Logo">
+
+            <div class="logo-text">
+
+                <h2>AiRosKy</h2>
+
+                <span>INSTITUTE OF FIRE & SAFETY EXCELLENCE</span>
+
+            </div>
+
+        </a>
+
+        <!-- Navigation -->
+        <nav>
+
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+
+                <li><a href="about.html">About</a></li>
+
+                <li><a href="courses.html">Courses</a></li>
+
+                <li><a href="certifications.html">Certifications</a></li>
+
+                <li><a href="placemnets.html">Placements</a></li>
+
+                <li><a href="contact.html">Contact</a></li>
+
+            </ul>
+
+        </nav>
+
+        <!-- Right Side -->
+        <div class="nav-right">
+
+            <a href="tel:+919999999999" class="phone">
+
+                <i class="fa-solid fa-phone"></i>
+
+                +91 99999 99999
+
+            </a>
+            <button id="openPopup" class="btn-enquiry">
+
+              Enquiry
+
+            </button>
+
+            <a href="#" class="btn-enroll">
+
+                Enroll Now
+
+            </a>
+
+        </div>
+
+        <!-- Mobile Toggle -->
+        <div class="menu-btn" id="menuOpen">
+
+            <i class="fa-solid fa-bars"></i>
+
+        </div>
+
+    </div>
+
+    <!-- =============================
+     MOBILE MENU
+============================= -->
+
+<div class="mobile-overlay" id="mobileOverlay">
+
+    <aside class="mobile-menu">
+
+        <button class="close-menu" id="menuClose">
+
+            <i class="fa-solid fa-xmark"></i>
+
+        </button>
+
+        <!-- Logo -->
+
+        <div class="mobile-logo">
+
+            <img src="../airoskylogo.jpeg" alt="AiRosKy Logo">
+
+            <div>
+
+                <h2>AiRosKy</h2>
+
+                <p>Institute of Fire & Safety Excellence</p>
+
+            </div>
+
+        </div>
+
+        <!-- Navigation -->
+
+        <ul class="mobile-nav">
+
+            <li><a href="../index.html">Home</a></li>
+
+            <li><a href="about.html">About</a></li>
+
+            <li><a href="courses.html">Courses</a></li>
+
+            <li><a href="certifications.html">Certifications</a></li>
+
+            <li><a href="placemnets.html">Placements</a></li>
+
+        </ul>
+
+        <!-- Contact -->
+
+        <div class="mobile-contact">
+
+            <h3>Contact Us</h3>
+
+            <a href="tel:+919669954789">
+                <i class="fa-solid fa-phone"></i>
+                Call : +91 96699 54789
+            </a>
+
+            <a href="https://wa.me/919669954789">
+                <i class="fa-brands fa-whatsapp"></i>
+                WhatsApp : +91 96699 54789
+            </a>
+
+            <a href="mailto:airoskyinstitute@gmail.com">
+                <i class="fa-solid fa-envelope"></i>
+                airoskyinstitute@gmail.com
+            </a>
+
+        </div>
+
+        <!-- Button -->
+
+        <a href="#" class="mobile-enroll">
+
+            Enroll Now
+
+        </a>
+
+    </aside>
+
+</div>
+<!-- ===========================
+ ENQUIRY POPUP
+=========================== -->
+
+<div class="popup-overlay" id="popup">
+
+    <div class="popup-box">
+
+        <button class="close-popup" id="closePopup">
+
+            <i class="fa-solid fa-xmark"></i>
+
+        </button>
+
+        <div class="popup-left">
+
+            <h2>Let's Build Your Career</h2>
+
+            <p>
+
+                Fill in your details and our admission counsellor
+                will contact you shortly.
+
+            </p>
+
+            <div class="popup-feature">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+                Free Career Counselling
+
+            </div>
+
+            <div class="popup-feature">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+                Placement Assistance
+
+            </div>
+
+            <div class="popup-feature">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+                Industry Certifications
+
+            </div>
+
+        </div>
+
+        <div class="popup-right">
+
+            <form>
+
+                <div class="input-box">
+
+                    <i class="fa-solid fa-user"></i>
+
+                    <input
+                    type="text"
+                    placeholder="Full Name"
+                    required>
+
+                </div>
+
+                <div class="input-box">
+
+                    <i class="fa-solid fa-phone"></i>
+
+                    <input
+                    type="tel"
+                    placeholder="Mobile Number"
+                    required>
+
+                </div>
+
+                <div class="input-box">
+
+                    <i class="fa-solid fa-envelope"></i>
+
+                    <input
+                    type="email"
+                    placeholder="Email Address">
+
+                </div>
+
+                <div class="input-box">
+
+                    <i class="fa-solid fa-book"></i>
+
+                    <select>
+
+                        <option>Select Course</option>
+
+                        <option>Fire & Safety</option>
+
+                        <option>Industrial Safety</option>
+
+                        <option>NEBOSH</option>
+
+                        <option>IOSH</option>
+
+                        <option>Diploma</option>
+
+                    </select>
+
+                </div>
+
+                <textarea
+                placeholder="Message (Optional)"
+                rows="4"></textarea>
+
+                <button type="submit" class="submit-btn">
+
+                    Submit Enquiry
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+</header>
+
+<!-- ======================================
+COURSES HERO
+====================================== -->
+
+<section class="course-hero">
+
+    <div class="course-overlay"></div>
+
+    <div class="container hero-content">
+
+        <span class="page-tag">
+
+            Professional Programs
+
+        </span>
+
+        <h1>
+
+            Fire & Safety
+            Professional Courses
+
+        </h1>
+
+        <p>
+
+            Explore industry-focused diploma, degree, certification
+            and corporate training programs designed to prepare you
+            for successful careers in Fire & Industrial Safety.
+
+        </p>
+
+    </div>
+
+</section>
+
+<!-- ======================================
+COURSE CATEGORIES
+====================================== -->
+
+<section class="course-categories">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <span class="section-tag">
+
+                Explore Programs
+
+            </span>
+
+            <h2>
+
+                Course Categories
+
+            </h2>
+
+        </div>
+
+        <div class="category-grid">
+
+            <div class="category-card">
+
+                <div class="category-icon">
+                    🎓
+                </div>
+
+                <h3>
+
+                    Diploma Programs
+
+                </h3>
+
+                <p>
+
+                    Professional diploma courses in Industrial Safety &
+                    Fire Management.
+
+                </p>
+
+            </div>
+
+            <div class="category-card">
+
+                <div class="category-icon">
+                    📘
+                </div>
+
+                <h3>
+
+                    Degree Programs
+
+                </h3>
+
+                <p>
+
+                    Undergraduate Fire & Safety programs with practical
+                    industrial exposure.
+
+                </p>
+
+            </div>
+
+            <div class="category-card">
+
+                <div class="category-icon">
+                    🏅
+                </div>
+
+                <h3>
+
+                    International Certifications
+
+                </h3>
+
+                <p>
+
+                    NEBOSH & IOSH certifications recognized worldwide.
+
+                </p>
+
+            </div>
+
+            <div class="category-card">
+
+                <div class="category-icon">
+                    🏭
+                </div>
+
+                <h3>
+
+                    Corporate Training
+
+                </h3>
+
+                <p>
+
+                    Industry-specific professional safety training
+                    programs.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ======================================
+FEATURED COURSES
+====================================== -->
+
+<section class="featured-courses">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <span class="section-tag">
+
+                Popular Courses
+
+            </span>
+
+            <h2>
+
+                Featured Programs
+
+            </h2>
+
+        </div>
+
+        <div class="featured-grid">
+
+            <!-- Course 1 -->
+
+            <div class="featured-card">
+
+                <div class="course-badge">
+
+                    Most Popular
+
+                </div>
+
+                <h3>
+
+                    Diploma in Industrial Safety &
+                    Fire Management
+
+                </h3>
+
+                <div class="course-details">
+
+                    <p><strong>Eligibility :</strong> 10th or Above</p>
+
+                    <p><strong>Duration :</strong> 1 Year</p>
+
+                </div>
+
+                <p>
+
+                    Comprehensive foundation program covering fire
+                    prevention, industrial safety, emergency response,
+                    hazard identification and practical training.
+
+                </p>
+
+                <a href="#">
+
+                    Learn More →
+
+                </a>
+
+            </div>
+
+            <!-- Course 2 -->
+
+            <div class="featured-card">
+
+                <div class="course-badge">
+
+                    Advanced
+
+                </div>
+
+                <h3>
+
+                    PG Diploma in Industrial
+                    Safety & Fire Management
+
+                </h3>
+
+                <div class="course-details">
+
+                    <p><strong>Eligibility :</strong> B.Sc.</p>
+
+                    <p><strong>Duration :</strong> 1 Year</p>
+
+                </div>
+
+                <p>
+
+                    Advanced industrial safety management with risk
+                    assessment, occupational health and safety
+                    regulations.
+
+                </p>
+
+                <a href="#">
+
+                    Learn More →
+
+                </a>
+
+            </div>
+
+            <!-- Course 3 -->
+
+            <div class="featured-card">
+
+                <div class="course-badge">
+
+                    Degree
+
+                </div>
+
+                <h3>
+
+                    B.Sc. in Fire &
+                    Safety
+
+                </h3>
+
+                <div class="course-details">
+
+                    <p><strong>Eligibility :</strong> 12th Pass</p>
+
+                    <p><strong>Duration :</strong> 3 Years</p>
+
+                </div>
+
+                <p>
+
+                    Undergraduate degree program combining theory,
+                    practical training and industrial internships.
+
+                </p>
+
+                <a href="#">
+
+                    Learn More →
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<!--=========================================
+ INTERNATIONAL CERTIFICATION COURSES
+==========================================-->
+
+<section class="certification-courses">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <span class="section-tag">
+
+                International Certifications
+
+            </span>
+
+            <h2>
+
+                Globally Recognized
+                Safety Certifications
+
+            </h2>
+
+            <p class="section-subtitle">
+
+                Enhance your career with internationally accepted
+                health and safety qualifications that are highly
+                valued across industries worldwide.
+
+            </p>
+
+        </div>
+
+        <div class="certification-grid">
+
+            <!-- NEBOSH -->
+
+            <div class="certification-card">
+
+                <div class="certificate-logo">
+
+                    <img src="images/nebosh-logo.png"
+                    alt="NEBOSH">
+
+                </div>
+
+                <span class="certificate-badge">
+
+                    International
+
+                </span>
+
+                <h3>
+
+                    NEBOSH Certification
+
+                </h3>
+
+                <p class="certificate-text">
+
+                    The National Examination Board in Occupational
+                    Safety and Health (NEBOSH) is one of the world's
+                    most respected safety qualifications, opening
+                    opportunities in India and internationally.
+
+                </p>
+
+                <div class="certificate-info">
+
+                    <div>
+
+                        <strong>Eligibility</strong>
+
+                        <span>Open to Professionals</span>
+
+                    </div>
+
+                    <div>
+
+                        <strong>Duration</strong>
+
+                        <span>As Per Batch</span>
+
+                    </div>
+
+                </div>
+
+                <ul class="certificate-features">
+
+                    <li>✔ International Recognition</li>
+
+                    <li>✔ Career Growth</li>
+
+                    <li>✔ Higher Salary Potential</li>
+
+                    <li>✔ Practical Learning</li>
+
+                </ul>
+
+                <a href="#" class="certificate-btn">
+
+                    Enquire Now
+
+                </a>
+
+            </div>
+
+            <!-- IOSH -->
+
+            <div class="certification-card">
+
+                <div class="certificate-logo">
+
+                    <img src="images/iosh-logo.png"
+                    alt="IOSH">
+
+                </div>
+
+                <span class="certificate-badge">
+
+                    Professional
+
+                </span>
+
+                <h3>
+
+                    IOSH Certification
+
+                </h3>
+
+                <p class="certificate-text">
+
+                    Institution of Occupational Safety and Health
+                    (IOSH) certification equips professionals with
+                    practical workplace safety knowledge recognized
+                    across global industries.
+
+                </p>
+
+                <div class="certificate-info">
+
+                    <div>
+
+                        <strong>Eligibility</strong>
+
+                        <span>Open to Professionals</span>
+
+                    </div>
+
+                    <div>
+
+                        <strong>Duration</strong>
+
+                        <span>As Per Batch</span>
+
+                    </div>
+
+                </div>
+
+                <ul class="certificate-features">
+
+                    <li>✔ Workplace Safety Skills</li>
+
+                    <li>✔ Global Recognition</li>
+
+                    <li>✔ Industry Approved</li>
+
+                    <li>✔ Professional Development</li>
+
+                </ul>
+
+                <a href="#" class="certificate-btn">
+
+                    Enquire Now
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<!--=========================================
+AVAILABLE INSTITUTIONAL COURSES
+==========================================-->
+
+<section class="course-list">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <span class="section-tag">
+
+                Complete Course List
+
+            </span>
+
+            <h2>
+
+                Available Institutional Courses
+
+            </h2>
+
+            <p class="section-subtitle">
+
+                Choose from our diploma, postgraduate diploma and certificate
+                programs designed to prepare you for successful careers in
+                Fire & Industrial Safety.
+
+            </p>
+
+        </div>
+
+        <div class="table-wrapper">
+
+            <table class="course-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Sr.</th>
+
+                        <th>Course Name</th>
+
+                        <th>Duration</th>
+
+                        <th>Eligibility</th>
+
+                        <th>Action</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr>
+
+                        <td>01</td>
+
+                        <td>Certificate in Fireman</td>
+
+                        <td><span class="badge">6 Months</span></td>
+
+                        <td>12th Pass</td>
+
+                        <td><a href="#" class="table-btn">Enroll Now</a></td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>02</td>
+
+                        <td>Certificate in Fire & Industrial Safety Management</td>
+
+                        <td><span class="badge">6 Months</span></td>
+
+                        <td>12th Pass</td>
+
+                        <td><a href="#" class="table-btn">Enroll Now</a></td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>03</td>
+
+                        <td>Certificate in Industrial Safety Management</td>
+
+                        <td><span class="badge">6 Months</span></td>
+
+                        <td>12th Pass</td>
+
+                        <td><a href="#" class="table-btn">Enroll Now</a></td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>04</td>
+
+                        <td>Certificate in Health, Safety & Environment</td>
+
+                        <td><span class="badge">6 Months</span></td>
+
+                        <td>12th Pass</td>
+
+                        <td><a href="#" class="table-btn">Enroll Now</a></td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>05</td>
+
+                        <td>Diploma in Fireman</td>
+
+                        <td><span class="badge">1 Year</span></td>
+
+                        <td>12th Pass</td>
+
+                        <td><a href="#" class="table-btn">Enroll Now</a></td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>06</td>
+
+                        <td>Diploma in Fire & Industrial Safety Management</td>
+
+                        <td><span class="badge">1 Year</span></td>
+
+                        <td>12th Pass</td>
+
+                        <td><a href="#" class="table-btn">Enroll Now</a></td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>07</td>
+
+                        <td>Diploma in Industrial Safety Management</td>
+
+                        <td><span class="badge">1 Year</span></td>
+
+                        <td>12th Pass</td>
+
+                        <td><a href="#" class="table-btn">Enroll Now</a></td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>08</td>
+
+                        <td>Diploma in Health, Safety & Environment</td>
+
+                        <td><span class="badge">1 Year</span></td>
+
+                        <td>12th Pass</td>
+
+                        <td><a href="#" class="table-btn">Enroll Now</a></td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>09</td>
+
+                        <td>PG Diploma in Fire & Industrial Safety Management</td>
+
+                        <td><span class="badge">1 Year</span></td>
+
+                        <td>Graduation</td>
+
+                        <td><a href="#" class="table-btn">Enroll Now</a></td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>10</td>
+
+                        <td>PG Diploma in Industrial Safety Management</td>
+
+                        <td><span class="badge">1 Year</span></td>
+
+                        <td>Graduation</td>
+
+                        <td><a href="#" class="table-btn">Enroll Now</a></td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>11</td>
+
+                        <td>PG Diploma in Health, Safety & Environment</td>
+
+                        <td><span class="badge">1 Year</span></td>
+
+                        <td>Graduation</td>
+
+                        <td><a href="#" class="table-btn">Enroll Now</a></td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>12</td>
+
+                        <td>Advance Diploma in Fire & Industrial Safety Management</td>
+
+                        <td><span class="badge">1 Year</span></td>
+
+                        <td>Graduation</td>
+
+                        <td><a href="#" class="table-btn">Enroll Now</a></td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>13</td>
+
+                        <td>ADIS_MSBT 1 (Advance Diploma in Industrial Safety Management)</td>
+
+                        <td><span class="badge">1 Year</span></td>
+
+                        <td>Diploma/Graduation</td>
+
+                        <td><a href="#" class="table-btn">Enroll Now</a></td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>14</td>
+
+                        <td>Advance Diploma in Health, Safety & Environment</td>
+
+                        <td><span class="badge">1 Year</span></td>
+
+                        <td>Graduation</td>
+
+                        <td><a href="#" class="table-btn">Enroll Now</a></td>
+
+                    </tr>
+                    <tr>
+
+                        <td>13</td>
+
+                        <td>PDIS 1 (Post Diploma in Industrial Safety Management)</td>
+
+                        <td><span class="badge">1 Year</span></td>
+
+                        <td>Diploma/Graduation</td>
+
+                        <td><a href="#" class="table-btn">Enroll Now</a></td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+<footer class="footer">
+
+    <div class="container">
+
+        <div class="footer-grid">
+
+            <!-- Column 1 -->
+
+            <div class="footer-col">
+
+                <img src="logo.png"
+                     alt="Logo"
+                     class="footer-logo">
+
+                <h3>
+                    <span class="brand-name">AiRosKy</span> Institute of Fire &
+                    Safety Excellence
+                </h3>
+
+                <p>
+                    Empowering future safety professionals through
+                    world-class education and practical training.
+                </p>
+
+            </div>
+
+            <!-- Column 2 -->
+
+            <div class="footer-col">
+
+                <h4>Quick Links</h4>
+
+                <ul>
+
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Courses</a></li>
+                    <li><a href="#">Placements</a></li>
+                    <li><a href="#">Contact</a></li>
+
+                </ul>
+
+            </div>
+
+            <!-- Column 3 -->
+
+            <div class="footer-col">
+
+                <h4>Courses</h4>
+
+                <ul>
+
+                    <li><a href="#">Fire & Safety</a></li>
+                    <li><a href="#">Industrial Safety</a></li>
+                    <li><a href="#">NEBOSH</a></li>
+                    <li><a href="#">IOSH</a></li>
+                    <li><a href="#">HSE Officer</a></li>
+
+                </ul>
+
+            </div>
+
+            <!-- Column 4 -->
+
+            <div class="footer-col">
+
+                <h4>Contact Info</h4>
+
+                <p>📞 +91 96699 54789</p>
+
+                <p>✉ airoskyinstitute@gmail.com</p>
+
+                <p>
+                    📍 Ratlam, Madhya Pradesh, India
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+
+            <p>
+                © 2026 <span class="brand-name">AiRosKy</span> Institute of Fire & Safety Excellence.
+                All Rights Reserved.
+            </p>
+
+        </div>
+
+    </div>
+
+</footer>
+
+<button id="topBtn">
+    ↑
+</button>
+<script src="../back.js"></script>
+</body>
+</html>
