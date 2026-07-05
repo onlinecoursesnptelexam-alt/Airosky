@@ -190,7 +190,7 @@ img{
 
 .brand-name{
 
-    color:var(--secondary);
+    color:var(--primary);
 
     font-weight:700;
 
@@ -1710,7 +1710,7 @@ max-height:45px;
 
     padding:140px 0;
 
-    background:url("images/corporate-training.jpg")
+    background:url("images/cpbanner2.png")
     center center/cover no-repeat;
 
     text-align:center;
@@ -2064,6 +2064,20 @@ max-height:45px;
     #121C4A);
 
     padding:120px 0;
+
+}
+
+.final-cta .brand-name,
+.footer .brand-name{
+
+    color:var(--white);
+
+}
+
+.cta-content{
+
+    position:relative;
+    z-index:2;
 
     text-align:center;
 
