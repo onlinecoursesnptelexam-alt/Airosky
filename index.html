@@ -1017,10 +1017,12 @@ CERTIFICATE VERIFICATION
 
             <div class="verify-form">
 
-                <form>
+                <form id="verifyForm">
 
                     <input
+                    id="certificateId"
                     type="text"
+                    name="certificateId"
                     placeholder="Enter Certificate ID"
                     required>
 
@@ -1033,6 +1035,88 @@ CERTIFICATE VERIFICATION
                     </button>
 
                 </form>
+
+                <div id="loading" class="verify-status loading" style="display:none;">
+
+                    <div class="spinner"></div>
+
+                    <p>Verifying Certificate...</p>
+
+                </div>
+
+                <div id="result" class="verify-result-card" style="display:none;">
+
+                    <div class="status success">
+
+                        <i class="fa-solid fa-badge-check"></i>
+
+                        Certificate Verified
+
+                    </div>
+
+                    <div class="result-grid">
+
+                        <div>
+
+                            <label>Certificate ID</label>
+
+                            <p id="r-id">AERO-2025-000001</p>
+
+                        </div>
+
+                        <div>
+
+                            <label>Student Name</label>
+
+                            <p id="r-name">Rahul Sharma</p>
+
+                        </div>
+
+                        <div>
+
+                            <label>Course</label>
+
+                            <p id="r-course">Diploma in Industrial Safety</p>
+
+                        </div>
+
+                        <div>
+
+                            <label>Issue Date</label>
+
+                            <p id="r-date">15 June 2025</p>
+
+                        </div>
+
+                        <div>
+
+                            <label>Status</label>
+
+                            <p id="r-status" class="valid">VALID</p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="button-group">
+
+                        <a href="#" class="view-btn">View Certificate</a>
+
+                        <a href="#" class="download-btn">Download PDF</a>
+
+                    </div>
+
+                </div>
+
+                <div id="invalid" class="verify-invalid-card" style="display:none;">
+
+                    <i class="fa-solid fa-circle-xmark"></i>
+
+                    <h3>Certificate Not Found</h3>
+
+                    <p>Please check the Certificate ID and try again.</p>
+
+                </div>
 
             </div>
 
@@ -1138,6 +1222,7 @@ CERTIFICATE VERIFICATION
     ↑
 </button>
 
+<script src="veryfication/verify.js"></script>
 <script src="back.js"></script>
 </body>
 </html>

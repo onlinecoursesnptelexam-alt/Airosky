@@ -2651,6 +2651,12 @@ CERTIFICATE VERIFICATION
 
     flex:1;
 
+    display:flex;
+
+    flex-direction:column;
+
+    gap:20px;
+
 }
 
 .verify-form form{
@@ -2666,6 +2672,208 @@ CERTIFICATE VERIFICATION
     gap:20px;
 
     box-shadow:0 20px 45px rgba(0,0,0,.18);
+
+}
+
+.verify-status,
+.verify-result-card,
+.verify-invalid-card{
+
+    background:white;
+
+    border-radius:20px;
+
+    padding:25px;
+
+    box-shadow:0 20px 45px rgba(0,0,0,.18);
+
+}
+
+.verify-status{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:12px;
+
+    color:#1B2A6B;
+
+    font-weight:600;
+
+}
+
+.spinner{
+
+    width:24px;
+
+    height:24px;
+
+    border:3px solid rgba(27,42,107,.2);
+
+    border-top-color:#F5A623;
+
+    border-radius:50%;
+
+    animation:spin 1s linear infinite;
+
+}
+
+@keyframes spin{
+
+    to{transform:rotate(360deg);}
+
+}
+
+.verify-result-card .status{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    padding:8px 14px;
+
+    border-radius:999px;
+
+    background:#E8F9EF;
+
+    color:#1f8f52;
+
+    font-weight:700;
+
+}
+
+.result-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,minmax(0,1fr));
+
+    gap:16px;
+
+    margin-top:16px;
+
+}
+
+.result-grid label{
+
+    display:block;
+
+    color:#6b7280;
+
+    font-size:14px;
+
+    font-weight:600;
+
+    margin-bottom:6px;
+
+}
+
+.result-grid p{
+
+    margin:0;
+
+    color:#111827;
+
+    font-weight:600;
+
+}
+
+.result-grid .valid{
+
+    color:#1f8f52;
+
+}
+
+.button-group{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:12px;
+
+    margin-top:18px;
+
+}
+
+.view-btn,
+.download-btn{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:10px 16px;
+
+    border-radius:10px;
+
+    text-decoration:none;
+
+    font-weight:700;
+
+    transition:.3s;
+
+}
+
+.view-btn{
+
+    background:#1B2A6B;
+
+    color:white;
+
+}
+
+.download-btn{
+
+    background:#F5A623;
+
+    color:white;
+
+}
+
+.view-btn:hover,
+.download-btn:hover{
+
+    transform:translateY(-2px);
+
+}
+
+.verify-invalid-card{
+
+    color:#b42318;
+
+    text-align:center;
+
+}
+
+.verify-invalid-card i{
+
+    font-size:28px;
+
+    margin-bottom:10px;
+
+}
+
+.verify-invalid-card h3{
+
+    margin:0 0 8px;
+
+    color:#b42318;
+
+}
+
+.verify-invalid-card p{
+
+    margin:0;
+
+    color:#7a2b24;
 
 }
 
