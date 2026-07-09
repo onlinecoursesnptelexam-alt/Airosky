@@ -12,14 +12,17 @@ Base.metadata.create_all(bind=engine)
 app = FastAPI(
     title="AEROSKY Certificate Verification"
 )
-
+BASE_URL = "https://aerosky-institute-1.onrender.com"
 # ------------------------------------
 # Enable CORS
 # ------------------------------------
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=[
+        "https://airoskyinstitute.com",
+        "https://www.airoskyinstitute.com"
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -93,6 +96,7 @@ def verify_certificate(
         "status":certificate.status,
 
         "certificate_url":
-        f"http://127.0.0.1:8000/certificates/{certificate.certificate}"
+        f"{BASE_URL}/certificates/{certificate.certificate}"
+
 
     }
