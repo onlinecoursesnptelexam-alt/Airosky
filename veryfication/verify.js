@@ -6,6 +6,8 @@ const result=document.getElementById("result");
 
 const invalid=document.getElementById("invalid");
 
+const API_BASE_URL = "https://aerosky-institute-vvot.onrender.com";
+
 const certificateIdFromUrl = new URLSearchParams(window.location.search).get("certificateId");
 
 if (certificateIdFromUrl) {
@@ -31,10 +33,8 @@ form.addEventListener("submit",async function(e){
 
     try{
 
-        const response=await fetch(
-
-            `http://127.0.0.1:8000/api/verify/${certificateId}`
-
+        const response = await fetch(
+             `${API_BASE_URL}/api/verify/${certificateId}`
         );
 
         loading.style.display="none";
