@@ -12,7 +12,7 @@ Base.metadata.create_all(bind=engine)
 app = FastAPI(
     title="AEROSKY Certificate Verification"
 )
-BASE_URL = "https://aerosky-institute-1.onrender.com"
+BASE_URL = "https://aerosky-institute-vvot.onrender.com"
 # ------------------------------------
 # Enable CORS
 # ------------------------------------
