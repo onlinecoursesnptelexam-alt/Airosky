@@ -7,6 +7,7 @@ import os
 import shutil
 import sys
 from datetime import datetime
+import pytz
 from sqlalchemy.orm import Session
 
 # Add backend directory to Python path
@@ -48,10 +49,11 @@ BASE_URL = "https://aerosky-institute-vvot.onrender.com"
 def generate_registration_number():
     """
     Generate registration number in format: AIR-DDMMYY-XXXXX
-    Example: AIR-011226-00001
+    Example: AIR-150726-00001
     """
-    # Get current date in DDMMYY format
-    current_date = datetime.now().strftime("%d%m%y")
+    # Get current date in DDMMYY format (using IST timezone UTC+5:30)
+    ist_timezone = pytz.timezone('Asia/Kolkata')
+    current_date = datetime.now(ist_timezone).strftime("%d%m%y")
     
     # Read or initialize counter
     if os.path.exists(COUNTER_FILE):
