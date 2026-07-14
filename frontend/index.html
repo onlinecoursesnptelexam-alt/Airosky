@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    
+
+</head>
+<body>
+
+<!-- Navbar Start -->
+<header class="navbar">
+
+    <div class="container nav-container">
+
+        <!-- Logo Area -->
+        <a href="#" class="logo-box">
+
+            <img src="logo.png" alt="AiRosKy Logo">
+
+            <div class="logo-text">
+
+                <h2>AiRosKy</h2>
+
+                <span>INSTITUTE OF FIRE & SAFETY EXCELLENCE</span>
+
+            </div>
+
+        </a>
+
+        <!-- Navigation -->
+        <nav>
+
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+
+                <li><a href="pages/about.html">About</a></li>
+
+                <li><a href="pages/courses.html">Courses</a></li>
+
+                <li><a href="pages/certifications.html">Certifications</a></li>
+
+                <li><a href="pages/placemnets.html">Placements</a></li>
+
+                <li><a href="pages/contact.html">Contact</a></li>
+
+            </ul>
+
+        </nav>
+
+        <!-- Right Side -->
+        <div class="nav-right">
+
+            <a href="tel:+919669954789" class="phone">
+
+                <i class="fa-solid fa-phone"></i>
+
+                +91 9669954789
+
+            </a>
+            <button id="openPopup" class="btn-enquiry">
+
+              Enquiry
+
+            </button>
+
+            <a href="enroll.html" class="btn-enroll">
+
+                Enroll Now
+
+            </a>
+
+        </div>
+
+        <!-- Mobile Toggle -->
+        <div class="menu-btn" id="menuOpen">
+
+            <i class="fa-solid fa-bars"></i>
+
+        </div>
+
+    </div>
+
+    <!-- =============================
+     MOBILE MENU
+============================= -->
+
+<div class="mobile-overlay" id="mobileOverlay">
+
+    <aside class="mobile-menu">
+
+        <button class="close-menu" id="menuClose">
+
+            <i class="fa-solid fa-xmark"></i>
+
+        </button>
+
+        <!-- Logo -->
+
+        <div class="mobile-logo">
+
+            <img src="logo.png" alt="AiRosKy Logo">
+
+            <div>
+
+                <h2>AiRosKy</h2>
+
+                <p>Institute of Fire & Safety Excellence</p>
+
+            </div>
+
+        </div>
+
+        <!-- Navigation -->
+
+        <ul class="mobile-nav">
+
+            <li><a href="#">Home</a></li>
+
+            <li><a href="pages/about.html">About</a></li>
+
+            <li><a href="pages/courses.html">Courses</a></li>
+
+            <li><a href="pages/certifications.html">Certifications</a></li>
+
+            <li><a href="pages/placemnets.html">Placements</a></li>
+
+        </ul>
+
+        <!-- Contact -->
+
+        <div class="mobile-contact">
+
+            <h3>Contact Us</h3>
+
+            <a href="tel:+919669954789">
+                <i class="fa-solid fa-phone"></i>
+                Call : +91 96699 54789
+            </a>
+
+            <a href="https://wa.me/919669954789">
+                <i class="fa-brands fa-whatsapp"></i>
+                WhatsApp : +91 96699 54789
+            </a>
+
+            <a href="mailto:airoskyinstitute@gmail.com">
+                <i class="fa-solid fa-envelope"></i>
+                airoskyinstitute@gmail.com
+            </a>
+
+        </div>
+
+        <!-- Button -->
+
+        <a href="enroll.html" class="mobile-enroll">
+
+            Enroll Now
+
+        </a>
+
+    </aside>
+
+</div>
+<!-- ===========================
+ ENQUIRY POPUP
+=========================== -->
+
+<div class="popup-overlay" id="popup">
+
+    <div class="popup-box">
+
+        <button class="close-popup" id="closePopup">
+
+            <i class="fa-solid fa-xmark"></i>
+
+        </button>
+
+        <div class="popup-left">
+
+            <h2>Let's Build Your Career</h2>
+
+            <p>
+
+                Fill in your details and our admission counsellor
+                will contact you shortly.
+
+            </p>
+
+            <div class="popup-feature">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+                Free Career Counselling
+
+            </div>
+
+            <div class="popup-feature">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+                Placement Assistance
+
+            </div>
+
+            <div class="popup-feature">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+                Industry Certifications
+
+            </div>
+
+        </div>
+
+        <div class="popup-right">
+
+            <form>
+
+                <div class="input-box">
+
+                    <i class="fa-solid fa-user"></i>
+
+                    <input
+                    type="text"
+                    placeholder="Full Name"
+                    required>
+
+                </div>
+
+                <div class="input-box">
+
+                    <i class="fa-solid fa-phone"></i>
+
+                    <input
+                    type="tel"
+                    placeholder="Mobile Number"
+                    required>
+
+                </div>
+
+                <div class="input-box">
+
+                    <i class="fa-solid fa-envelope"></i>
+
+                    <input
+                    type="email"
+                    placeholder="Email Address">
+
+                </div>
+
+                <div class="input-box">
+
+                    <i class="fa-solid fa-book"></i>
+
+                    <select>
+
+                        <option>Select Course</option>
+
+                        <option>Fire & Safety</option>
+
+                        <option>Industrial Safety</option>
+
+                        <option>NEBOSH</option>
+
+                        <option>IOSH</option>
+
+                        <option>Diploma</option>
+
+                    </select>
+
+                </div>
+
+                <textarea
+                placeholder="Message (Optional)"
+                rows="4"></textarea>
+
+                <button type="submit" class="submit-btn">
+
+                    Submit Enquiry
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+</header>
+<!-- Navbar End -->
+ <section class="hero">
+
+    <div class="hero-overlay"></div>
+
+    <div class="container hero-content">
+
+        <span class="hero-badge">
+            Premier Safety Institute
+        </span>
+
+        <h1>
+            Building Careers Through
+            <span>Knowledge</span> &
+            <span>Training Excellence</span>
+        </h1>
+
+        <p>
+            Industry-focused Fire & Safety, NEBOSH, IOSH and Industrial
+            Safety programs designed to create future safety leaders.
+        </p>
+
+        <div class="hero-buttons">
+
+            <a href="enroll.html" class="btn-primary">
+                Get Certified Today
+            </a>
+
+            <a href="pages/courses.html" class="btn-secondary">
+                Explore Courses
+            </a>
+
+        </div>
+
+        <div class="hero-features">
+
+            <div>✓ Placement Support</div>
+            <div>✓ Industry Certifications</div>
+            <div>✓ Practical Training</div>
+
+        </div>
+
+    </div>
+
+</section>
+<!-- <section class="trust-banner">
+
+    <div class="container trust-wrapper">
+
+        <div class="trust-item">
+            🏆 NEBOSH
+        </div>
+
+        <div class="trust-item">
+            🛡 IOSH
+        </div>
+
+        <div class="trust-item">
+            📜 ISO Certified
+        </div>
+
+        <div class="trust-item">
+            🎓 Govt Approved
+        </div>
+        
+         <div class="trust-item">
+            MSME
+        </div>
+
+        <div class="trust-item">
+            🏢 Corporate Training
+        </div>
+
+    </div>
+
+</section> -->
+<section class="trust-banner">
+
+    <div class="trust-slider">
+
+        <div class="trust-track">
+
+            <!-- First Set -->
+
+            <div class="logo-item">
+                <img src="images/nebosh.png" alt="NEBOSH">
+                <span>NEBOSH</span>
+            </div>
+
+            <div class="logo-item">
+                <img src="images/iosh.png" alt="IOSH">
+                <span>IOSH</span>
+
+            </div>
+
+
+            <div class="logo-item">
+                <img src="images/MSME.png" alt="MCA">
+                <span>MSME Registered</span>
+
+            </div>
+
+            <div class="logo-item">
+                <img src="images/ISO Logo.png" alt="ISO">
+                <span>ISO CERTIFIEID</span>
+
+            </div>
+
+            <div class="logo-item">
+                <img src="images/CT.webp" alt="Corporate Training">
+                <span>CORPORATE TRAINING</span>
+
+            </div>
+
+            <!-- Duplicate for Infinite Loop -->
+
+            <div class="logo-item">
+                <img src="images/Nebosh full logo.jpg" alt="NEBOSH">
+                <span>NEBOSH</span>
+
+            </div>
+
+            <div class="logo-item">
+                <img src="images/IOSH-Approved.png" alt="IOSH">
+                <span>IOSH</span>
+
+            </div>
+
+
+            <div class="logo-item">
+                <img src="images/MSME.png" alt="MCA">
+                <SPAN>MSME Registered</SPAN>
+            </div>
+
+            <div class="logo-item">
+                <img src="images/ISO Logo.png" alt="ISO">
+                <span>ISO Certified</span>
+            </div>
+
+            <div class="logo-item">
+                <img src="images/CT.webp" alt="Corporate Training">
+                <span>CORPORATE TRAINING</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<section class="about">
+
+    <div class="container about-wrapper">
+
+        <div class="about-image">
+
+            <img src="images/ONGC.jpg"
+                 alt="About AiRosKy">
+
+        </div>
+
+        <div class="about-content">
+
+            <span class="section-tag">
+                About <span class="brand-name">AiRosKy</span>
+            </span>
+
+            <h2>
+                Empowering Safety Professionals
+                For A Safer Future
+            </h2>
+
+            <p>
+                <span class="brand-name">AiRosKy</span> Institute of Fire & Safety Excellence provides
+                professional training programs in Fire Safety,
+                Industrial Safety, Health & Safety Management,
+                NEBOSH, IOSH and Corporate Safety Training.
+            </p>
+
+            <div class="about-checklist">
+
+                <div>✓ Certified Trainers</div>
+
+                <div>✓ Placement Assistance</div>
+
+                <div>✓ Practical Workshops</div>
+
+                <div>✓ Modern Infrastructure</div>
+
+                <div>✓ Industry Certifications</div>
+
+                <div>✓ Corporate Training</div>
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+<section class="why-us">
+
+    <div class="container">
+
+        <span class="section-tag">
+            Why Choose Us
+        </span>
+
+        <h2 class="section-title">
+            Building Industry Ready
+            Safety Professionals
+        </h2>
+
+        <div class="why-grid">
+
+            <div class="why-card">
+
+                <div class="why-icon">
+                    🧑‍🏫
+                </div>
+
+                <h3>Expert Faculty</h3>
+
+                <p>
+                    Learn from experienced industry professionals and certified trainers.
+                </p>
+
+            </div>
+
+            <div class="why-card">
+
+                <div class="why-icon">
+                    🎓
+                </div>
+
+                <h3>Certified Programs</h3>
+
+                <p>
+                    Internationally recognized safety certifications and training.
+                </p>
+
+            </div>
+
+            <div class="why-card">
+
+                <div class="why-icon">
+                    💼
+                </div>
+
+                <h3>Placement Support</h3>
+
+                <p>
+                    Dedicated career guidance and placement assistance.
+                </p>
+
+            </div>
+
+            <div class="why-card">
+
+                <div class="why-icon">
+                    🔥
+                </div>
+
+                <h3>Practical Training</h3>
+
+                <p>
+                    Real-world fire safety drills and industrial safety workshops.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<section class="courses">
+
+    <div class="container">
+
+        <span class="section-tag">
+            Our Courses
+        </span>
+
+        <h2 class="section-title">
+            Professional Fire & Safety Programs
+        </h2>
+
+        <div class="course-grid">
+
+            <!-- Course 1 -->
+
+            <div class="course-card">
+
+                <h3>Diploma in Industrial Safety & Fire Management</h3>
+
+                <div class="course-info">
+                    <p><strong>Eligibility:</strong> 10th or Above</p>
+                    <p><strong>Duration:</strong> 1 Year</p>
+                </div>
+
+                <p>
+                    Comprehensive foundation program covering essential safety
+                    protocols, industrial hazard management, and fire prevention
+                    techniques.
+                </p>
+
+                <a href="#">View Details →</a>
+
+            </div>
+
+            <!-- Course 2 -->
+
+            <div class="course-card">
+
+                <h3>PG Diploma in Industrial Safety & Fire Management</h3>
+
+                <div class="course-info">
+                    <p><strong>Eligibility:</strong> Graduation</p>
+                    <p><strong>Duration:</strong> 1 Year</p>
+                </div>
+
+                <p>
+                    Advanced program designed for graduates seeking specialized
+                    expertise in industrial safety management and occupational
+                    health practices.
+                </p>
+
+                <a href="#">View Details →</a>
+
+            </div>
+
+            <!-- Course 3 -->
+
+            <div class="course-card">
+
+                <h3>ADIS- Advance Diploma in Industrial Safety Management</h3>
+
+                <div class="course-info">
+                    <p><strong>Eligibility:</strong> Diploma  or Graduation</p>
+                    <p><strong>Duration:</strong> 1 Year</p>
+                </div>
+
+                <p>
+                    Advanced Diploma designed for graduates/Diploma seeking specialized
+                    expertise in industrial safety management.
+                </p>
+
+                <a href="#">View Details →</a>
+
+            </div>
+
+            <!-- Course 4 -->
+
+            <div class="course-card">
+
+                <h3>B.Sc. in Fire & Safety</h3>
+
+                <div class="course-info">
+                    <p><strong>Eligibility:</strong> 12th Pass</p>
+                    <p><strong>Duration:</strong> 3 Years</p>
+                </div>
+
+                <p>
+                    Comprehensive undergraduate degree combining theoretical
+                    knowledge with practical fire safety and industrial safety
+                    training.
+                </p>
+
+                <a href="#">View Details →</a>
+
+            </div>
+
+            <!-- Course 4 -->
+
+            <div class="course-card">
+
+                <h3>NEBOSH Certification</h3>
+
+                <div class="course-info">
+                    <p><strong>Eligibility:</strong> Open to Professionals</p>
+                    <p><strong>Duration:</strong> As Per Batch</p>
+                </div>
+
+                <p>
+                    Internationally recognized health and safety certification
+                    preparing professionals for global career opportunities.
+                </p>
+
+                <a href="#">View Details →</a>
+
+            </div>
+
+            <!-- Course 5 -->
+
+            <div class="course-card">
+
+                <h3>IOSH Certification</h3>
+
+                <div class="course-info">
+                    <p><strong>Eligibility:</strong> Open to Professionals</p>
+                    <p><strong>Duration:</strong> As Per Batch</p>
+                </div>
+
+                <p>
+                    Globally accepted occupational safety certification focused on
+                    workplace health, risk management, and safety leadership.
+                </p>
+
+                <a href="#">View Details →</a>
+
+            </div>
+
+        </div>
+
+        <div class="courses-footer">
+
+            <a href="#" class="btn-secondary">
+                View All Courses
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+<section class="corporate-banner">
+
+    <div class="overlay"></div>
+
+    <div class="container corporate-content">
+
+        <div class="award-icon">
+            🏆
+        </div>
+
+        <span class="section-badge">
+            PROFESSIONAL TRAINING PROGRAMS
+        </span>
+
+        <h2>
+            Industrial Safety <br>
+            Training & Certification
+        </h2>
+
+        <p>
+            Enhance workplace safety with industry-focused practical training
+            programs designed for professionals, industries, educational
+            institutions, and corporate organizations.
+        </p>
+
+        <div class="training-list">
+
+            <div class="training-item">
+                🔥 Fire Fighting
+            </div>
+
+            <div class="training-item">
+                ⛑ First Aid
+            </div>
+
+            <div class="training-item">
+                🚗 Defensive Driving
+            </div>
+
+            <div class="training-item">
+                🦺 Behavior Based Safety (BBS)
+            </div>
+
+            <div class="training-item">
+                📋 Accident Investigation
+            </div>
+
+        </div>
+
+        <a href="#" class="corporate-btn">
+            Enquire for Training
+        </a>
+
+    </div>
+
+</section>
+<section class="placements">
+
+    <div class="container">
+
+        <span class="section-tag">
+            Career Success
+        </span>
+
+        <h2 class="section-title">
+            Our Students Work With
+            Leading Organizations
+        </h2>
+
+        <p class="section-description">
+            We provide career guidance, interview preparation and
+            placement assistance to help students build successful careers.
+        </p>
+
+        <div class="placement-stats">
+
+            <div class="stat-box">
+                <h3>150+</h3>
+                <p>Students Placed</p>
+            </div>
+
+            <div class="stat-box">
+                <h3>25+</h3>
+                <p>Hiring Partners</p>
+            </div>
+
+            <div class="stat-box">
+                <h3>95%</h3>
+                <p>Placement Support</p>
+            </div>
+
+            <div class="stat-box">
+                <h3>10+</h3>
+                <p>Countries Opportunities</p>
+            </div>
+
+        </div>
+
+        <div class="company-slider">
+
+            <div class="company-track">
+
+                <div class="company">TATA</div>
+                <div class="company">L&T</div>
+                <div class="company">ONGC</div>
+                <div class="company">ADANI POWER</div>
+                <div class="company">RELIANCE</div>
+                <div class="company">BPCL</div>
+                <div class="company">IOCL</div>
+                <div class="company">SUZLON ENERGY</div>
+                <div class="company">VESTAS</div>
+                <div class="company">INOX ENERGY</div>
+                <div class="company">SGRE</div>
+
+
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<section class="testimonials">
+
+    <div class="container">
+
+        <span class="section-tag">
+            Student Reviews
+        </span>
+
+        <h2 class="section-title">
+            What Our Students Say
+        </h2>
+
+        <div class="testimonial-grid">
+
+            <div class="testimonial-card">
+
+                <div class="stars">
+                    ★★★★★
+                </div>
+
+                <p>
+                    The practical training and placement support helped me
+                    secure a safety officer position immediately after completion.
+                </p>
+
+                <h4>Mohammed Arif</h4>
+
+                <span>Safety Officer</span>
+
+            </div>
+
+            <div class="testimonial-card">
+
+                <div class="stars">
+                    ★★★★★
+                </div>
+
+                <p>
+                    Excellent faculty, industrial exposure and certification guidance.
+                </p>
+
+                <h4>Rahul Sharma</h4>
+
+                <span>Industrial Safety Engineer</span>
+
+            </div>
+
+            <div class="testimonial-card">
+
+                <div class="stars">
+                    ★★★★★
+                </div>
+
+                <p>
+                    One of the best institutes for Fire & Safety training.
+                </p>
+
+                <h4>Imran Khan</h4>
+
+                <span>HSE Professional</span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<section class="gallery">
+
+    <div class="container">
+
+        <span class="section-tag">
+            Campus Life
+        </span>
+
+        <h2 class="section-title">
+            Training & Workshop Gallery
+        </h2>
+
+        <div class="gallery-grid">
+
+            <img src="images/smallBanner.png" alt="">
+            <img src="images/smallBanner.png" alt="">
+            <img src="images/smallBanner.png" alt="">
+            <img src="images/smallBanner.png" alt="">
+            <img src="images/smallBanner.png" alt="">
+            <img src="images/smallBanner.png" alt="">
+
+        </div>
+
+    </div>
+
+</section>
+<section class="final-cta">
+
+    <div class="container">
+
+        <div class="cta-content">
+
+            <span class="cta-badge">
+                Start Your Career Today
+            </span>
+
+            <h2>
+                Become a Certified
+                Fire & Safety Professional
+            </h2>
+
+            <p>
+                Join <span class="brand-name">AiRosKy</span> Institute of Fire & Safety Excellence and build
+                a successful career with globally recognized certifications.
+            </p>
+
+            <div class="cta-buttons">
+
+                <a href="#" class="cta-btn-primary">
+                    Enroll Now
+                </a>
+
+                <a href="#" class="cta-btn-secondary">
+                    Download Brochure
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<!--=========================================
+CERTIFICATE VERIFICATION
+==========================================-->
+
+<section class="certificate-verification">
+
+    <div class="container">
+
+        <div class="verify-wrapper">
+
+            <div class="verify-content">
+
+                <span class="section-tag">
+
+                    Certificate Verification
+
+                </span>
+
+                <h2>
+
+                    Verify Your
+                    Certificate Online
+
+                </h2>
+
+                <p>
+
+                    Enter your unique Certificate ID to verify the
+                    authenticity of your AEROSKY Institute certificate.
+                    Employers and organizations can instantly validate
+                    issued certificates.
+
+                </p>
+
+            </div>
+
+            <div class="verify-form">
+
+                <form id="verifyForm">
+
+                    <input
+                    id="certificateId"
+                    type="text"
+                    name="certificateId"
+                    placeholder="Enter Certificate ID"
+                    required>
+
+                    <button type="submit">
+
+                        <i class="fa-solid fa-shield-check"></i>
+
+                        Verify Certificate
+
+                    </button>
+
+                </form>
+
+                <div id="loading" class="verify-status loading" style="display:none;">
+
+                    <div class="spinner"></div>
+
+                    <p>Verifying Certificate...</p>
+
+                </div>
+
+                <div id="result" class="verify-result-card" style="display:none;">
+
+                    <div class="status success">
+
+                        <i class="fa-solid fa-badge-check"></i>
+
+                        Certificate Verified
+
+                    </div>
+
+                    <div class="result-grid">
+
+                        <div>
+
+                            <label>Certificate ID</label>
+
+                            <p id="r-id">AERO-2025-000001</p>
+
+                        </div>
+
+                        <div>
+
+                            <label>Student Name</label>
+
+                            <p id="r-name">Rahul Sharma</p>
+
+                        </div>
+
+                        <div>
+
+                            <label>Course</label>
+
+                            <p id="r-course">Diploma in Industrial Safety</p>
+
+                        </div>
+
+                        <div>
+
+                            <label>Issue Date</label>
+
+                            <p id="r-date">15 June 2025</p>
+
+                        </div>
+
+                        <div>
+
+                            <label>Status</label>
+
+                            <p id="r-status" class="valid">VALID</p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="button-group">
+
+                        <a href="#" class="view-btn">View Certificate</a>
+
+                        <a href="#" class="download-btn">Download PDF</a>
+
+                    </div>
+
+                </div>
+
+                <div id="invalid" class="verify-invalid-card" style="display:none;">
+
+                    <i class="fa-solid fa-circle-xmark"></i>
+
+                    <h3>Certificate Not Found</h3>
+
+                    <p>Please check the Certificate ID and try again.</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<footer class="footer">
+
+    <div class="container">
+
+        <div class="footer-grid">
+
+            <!-- Column 1 -->
+
+            <div class="footer-col">
+
+                <img src="logo.png"
+                     alt="Logo"
+                     class="footer-logo">
+
+                <h3>
+                    <span class="brand-name">AiRosKy</span> Institute of Fire &
+                    Safety Excellence
+                </h3>
+
+                <p>
+                    Empowering future safety professionals through
+                    world-class education and practical training.
+                </p>
+
+            </div>
+
+            <!-- Column 2 -->
+
+            <div class="footer-col">
+
+                <h4>Quick Links</h4>
+
+                <ul>
+
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Courses</a></li>
+                    <li><a href="#">Placements</a></li>
+                    <li><a href="#">Contact</a></li>
+
+                </ul>
+
+            </div>
+
+            <!-- Column 3 -->
+
+            <div class="footer-col">
+
+                <h4>Courses</h4>
+
+                <ul>
+
+                    <li><a href="#">Fire & Safety</a></li>
+                    <li><a href="#">Industrial Safety</a></li>
+                    <li><a href="#">NEBOSH</a></li>
+                    <li><a href="#">IOSH</a></li>
+                    <li><a href="#">HSE Officer</a></li>
+
+                </ul>
+
+            </div>
+
+            <!-- Column 4 -->
+
+            <div class="footer-col">
+
+                <h4>Contact Info</h4>
+
+                <p>📞 +91 96699 54789</p>
+
+                <p>✉ airoskyinstitute@gmail.com</p>
+
+                <p>
+                    📍 Ratlam, Madhya Pradesh, India
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+
+            <p>
+                © 2026 <span class="brand-name">AiRosKy</span> Institute of Fire & Safety Excellence.
+                All Rights Reserved.
+            </p>
+
+        </div>
+
+    </div>
+
+</footer>
+
+<button id="topBtn">
+    ↑
+</button>
+
+<script src="veryfication/verify.js"></script>
+<script src="back.js"></script>
+</body>
+</html>

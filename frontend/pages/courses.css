@@ -1,0 +1,735 @@
+/*==================================
+COURSE HERO
+==================================*/
+
+.course-hero{
+
+    position:relative;
+
+    height:60vh;
+
+    display:flex;
+
+    align-items:center;
+
+    background:url("images/course-banner.jpg")
+    center/cover;
+
+}
+
+.course-overlay{
+
+    position:absolute;
+
+    inset:0;
+
+    background:rgba(18,28,74,.80);
+
+}
+
+.course-hero .hero-content{
+
+    position:relative;
+
+    z-index:2;
+
+    max-width:750px;
+
+    color:white;
+
+}
+
+.course-hero h1{
+
+    font-family:'Playfair Display',serif;
+
+    font-size:60px;
+
+    line-height:1.2;
+
+    margin:20px 0;
+
+}
+
+.course-hero p{
+
+    font-size:19px;
+
+    line-height:1.8;
+
+}
+
+/*==================================
+COURSE CATEGORY
+==================================*/
+
+.course-categories{
+
+    padding:120px 0;
+
+    background:#fff;
+
+}
+
+.category-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:30px;
+
+    margin-top:60px;
+
+}
+
+.category-card{
+
+    background:#F7F5EF;
+
+    padding:40px;
+
+    border-radius:20px;
+
+    text-align:center;
+
+    transition:.35s;
+
+}
+
+.category-card:hover{
+
+    transform:translateY(-10px);
+
+    box-shadow:0 20px 40px rgba(0,0,0,.08);
+
+}
+
+.category-icon{
+
+    font-size:55px;
+
+    margin-bottom:20px;
+
+}
+
+.category-card h3{
+
+    color:#1B2A6B;
+
+    margin-bottom:15px;
+
+}
+
+.category-card p{
+
+    color:#6B7280;
+
+    line-height:1.8;
+
+}
+
+/*==================================
+FEATURED COURSES
+==================================*/
+
+.featured-courses{
+
+    background:#F7F5EF;
+
+    padding:120px 0;
+
+}
+
+.featured-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:30px;
+
+    margin-top:60px;
+
+}
+
+.featured-card{
+
+    background:white;
+
+    padding:35px;
+
+    border-radius:22px;
+
+    border:1px solid #E5E7EB;
+
+    position:relative;
+
+    transition:.4s;
+
+}
+
+.featured-card:hover{
+
+    transform:translateY(-10px);
+
+    box-shadow:0 20px 45px rgba(0,0,0,.10);
+
+}
+
+.course-badge{
+
+    display:inline-block;
+
+    background:#F5A623;
+
+    color:white;
+
+    padding:8px 18px;
+
+    border-radius:30px;
+
+    font-size:13px;
+
+    margin-bottom:20px;
+
+    font-weight:600;
+
+}
+
+.featured-card h3{
+
+    color:#1B2A6B;
+
+    font-size:28px;
+
+    line-height:1.35;
+
+    margin-bottom:25px;
+
+    font-family:'Playfair Display',serif;
+
+}
+
+.course-details{
+
+    background:#F8FAFC;
+
+    border-left:4px solid #F5A623;
+
+    padding:18px;
+
+    border-radius:10px;
+
+    margin-bottom:25px;
+
+}
+
+.course-details p{
+
+    margin:8px 0;
+
+    color:#374151;
+
+}
+
+.featured-card>p{
+
+    color:#6B7280;
+
+    line-height:1.8;
+
+    margin-bottom:25px;
+
+}
+
+.featured-card a{
+
+    color:#E05A0C;
+
+    font-weight:700;
+
+}
+
+.featured-card a:hover{
+
+    color:#1B2A6B;
+
+}
+
+/*==================================
+RESPONSIVE
+==================================*/
+
+@media(max-width:992px){
+
+.category-grid{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+.featured-grid{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+}
+
+@media(max-width:768px){
+
+.course-hero{
+
+height:55vh;
+
+text-align:center;
+
+}
+
+.course-hero h1{
+
+font-size:40px;
+
+}
+
+.category-grid,
+
+.featured-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.featured-card{
+
+padding:28px;
+
+}
+
+.featured-card h3{
+
+font-size:24px;
+
+}
+
+}
+/*==================================
+CERTIFICATION COURSES
+==================================*/
+
+.certification-courses{
+
+    padding:120px 0;
+
+    background:#ffffff;
+
+}
+
+.certification-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:35px;
+
+    margin-top:60px;
+
+}
+
+.certification-card{
+
+    background:#F7F5EF;
+
+    padding:45px;
+
+    border-radius:22px;
+
+    position:relative;
+
+    overflow:hidden;
+
+    transition:.4s;
+
+    border:1px solid #E5E7EB;
+
+}
+
+.certification-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:0;
+
+    width:100%;
+
+    height:5px;
+
+    background:#F5A623;
+
+    transform:scaleX(0);
+
+    transition:.4s;
+
+    transform-origin:left;
+
+}
+
+.certification-card:hover::before{
+
+    transform:scaleX(1);
+
+}
+
+.certification-card:hover{
+
+    transform:translateY(-10px);
+
+    box-shadow:0 25px 50px rgba(0,0,0,.10);
+
+}
+
+.certificate-logo{
+
+    width:110px;
+
+    margin-bottom:25px;
+
+}
+
+.certificate-logo img{
+
+    width:100%;
+
+    object-fit:contain;
+
+}
+
+.certificate-badge{
+
+    display:inline-block;
+
+    padding:8px 18px;
+
+    background:#F5A623;
+
+    color:#fff;
+
+    border-radius:30px;
+
+    font-size:13px;
+
+    font-weight:600;
+
+    margin-bottom:20px;
+
+}
+
+.certification-card h3{
+
+    color:#1B2A6B;
+
+    font-size:34px;
+
+    margin-bottom:20px;
+
+    font-family:'Playfair Display',serif;
+
+}
+
+.certificate-text{
+
+    color:#6B7280;
+
+    line-height:1.9;
+
+    margin-bottom:25px;
+
+}
+
+.certificate-info{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:20px;
+
+    background:#fff;
+
+    padding:20px;
+
+    border-radius:15px;
+
+    margin-bottom:30px;
+
+}
+
+.certificate-info strong{
+
+    display:block;
+
+    color:#1B2A6B;
+
+    margin-bottom:8px;
+
+}
+
+.certificate-info span{
+
+    color:#6B7280;
+
+}
+
+.certificate-features{
+
+    list-style:none;
+
+    margin-bottom:35px;
+
+}
+
+.certificate-features li{
+
+    padding:10px 0;
+
+    color:#374151;
+
+    border-bottom:1px solid #E5E7EB;
+
+}
+
+.certificate-features li:last-child{
+
+    border-bottom:none;
+
+}
+
+.certificate-btn{
+
+    display:inline-block;
+
+    padding:15px 35px;
+
+    background:#F5A623;
+
+    color:#fff;
+
+    border-radius:50px;
+
+    font-weight:700;
+
+    transition:.35s;
+
+}
+
+.certificate-btn:hover{
+
+    background:#E05A0C;
+
+    transform:translateY(-3px);
+
+}
+
+/*==================================
+RESPONSIVE
+==================================*/
+
+@media(max-width:992px){
+
+.certification-grid{
+
+grid-template-columns:1fr;
+
+}
+
+}
+
+@media(max-width:768px){
+
+.certification-courses{
+
+padding:80px 0;
+
+}
+
+.certification-card{
+
+padding:30px;
+
+}
+
+.certification-card h3{
+
+font-size:28px;
+
+}
+
+.certificate-info{
+
+grid-template-columns:1fr;
+
+}
+
+.certificate-logo{
+
+width:90px;
+
+}
+
+}
+
+/*====================================
+AVAILABLE COURSES TABLE
+====================================*/
+
+.course-list{
+
+    padding:120px 0;
+
+    background:#ffffff;
+
+}
+
+.table-wrapper{
+
+    overflow-x:auto;
+
+    margin-top:60px;
+
+    border-radius:20px;
+
+    box-shadow:0 20px 50px rgba(0,0,0,.08);
+
+}
+
+.course-table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    background:#fff;
+
+    min-width:900px;
+
+}
+
+.course-table thead{
+
+    background:#1B2A6B;
+
+}
+
+.course-table th{
+
+    color:#fff;
+
+    padding:22px;
+
+    text-align:left;
+
+    font-size:16px;
+
+    font-weight:600;
+
+}
+
+.course-table td{
+
+    padding:20px;
+
+    border-bottom:1px solid #E5E7EB;
+
+    color:#555;
+
+}
+
+.course-table tbody tr{
+
+    transition:.35s;
+
+}
+
+.course-table tbody tr:hover{
+
+    background:#FFF8EB;
+
+}
+
+.badge{
+
+    display:inline-block;
+
+    padding:8px 15px;
+
+    background:#F5A623;
+
+    color:#fff;
+
+    border-radius:30px;
+
+    font-size:13px;
+
+    font-weight:600;
+
+}
+
+.table-btn{
+
+    display:inline-block;
+
+    padding:10px 22px;
+
+    background:#1B2A6B;
+
+    color:#fff;
+
+    border-radius:40px;
+
+    font-size:14px;
+
+    font-weight:600;
+
+    transition:.35s;
+
+}
+
+.table-btn:hover{
+
+    background:#F5A623;
+
+    transform:translateY(-2px);
+
+}
+
+@media(max-width:768px){
+
+.course-list{
+
+padding:80px 0;
+
+}
+
+.course-table{
+
+min-width:760px;
+
+}
+
+.course-table th,
+
+.course-table td{
+
+padding:16px;
+
+font-size:14px;
+
+}
+
+}

@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="./placement.css">
+
+</head>
+<body>
+
+<!-- Navbar Start -->
+<header class="navbar">
+
+    <div class="container nav-container">
+
+        <!-- Logo Area -->
+        <a href="#" class="logo-box">
+
+            <img src="../logo.png" alt="AiRosKy Logo">
+
+            <div class="logo-text">
+
+                <h2>AiRosKy</h2>
+
+                <span>INSTITUTE OF FIRE & SAFETY EXCELLENCE</span>
+
+            </div>
+
+        </a>
+
+        <!-- Navigation -->
+        <nav>
+
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+
+                <li><a href="about.html">About</a></li>
+
+                <li><a href="courses.html">Courses</a></li>
+
+                <li><a href="certifications.html">Certifications</a></li>
+
+                <li><a href="#">Placements</a></li>
+
+                <li><a href="contact.html">Contact</a></li>
+
+            </ul>
+
+        </nav>
+
+        <!-- Right Side -->
+        <div class="nav-right">
+
+            <a href="tel:+919999999999" class="phone">
+
+                <i class="fa-solid fa-phone"></i>
+
+                +91 99999 99999
+
+            </a>
+            <button id="openPopup" class="btn-enquiry">
+
+              Enquiry
+
+            </button>
+
+            <a href="#" class="btn-enroll">
+
+                Enroll Now
+
+            </a>
+
+        </div>
+
+        <!-- Mobile Toggle -->
+        <div class="menu-btn" id="menuOpen">
+
+            <i class="fa-solid fa-bars"></i>
+
+        </div>
+
+    </div>
+
+    <!-- =============================
+     MOBILE MENU
+============================= -->
+
+<div class="mobile-overlay" id="mobileOverlay">
+
+    <aside class="mobile-menu">
+
+        <button class="close-menu" id="menuClose">
+
+            <i class="fa-solid fa-xmark"></i>
+
+        </button>
+
+        <!-- Logo -->
+
+        <div class="mobile-logo">
+
+            <img src="../logo.png" alt="AiRosKy Logo">
+
+            <div>
+
+                <h2>AiRosKy</h2>
+
+                <p>Institute of Fire & Safety Excellence</p>
+
+            </div>
+
+        </div>
+
+        <!-- Navigation -->
+
+        <ul class="mobile-nav">
+
+            <li><a href="../index.html">Home</a></li>
+
+            <li><a href="about.html">About</a></li>
+
+            <li><a href="courses.html">Courses</a></li>
+
+            <li><a href="certifications.html">Certifications</a></li>
+
+            <li><a href="#">Placements</a></li>
+
+        </ul>
+
+        <!-- Contact -->
+
+        <div class="mobile-contact">
+
+            <h3>Contact Us</h3>
+
+            <a href="tel:+919669954789">
+                <i class="fa-solid fa-phone"></i>
+                Call : +91 96699 54789
+            </a>
+
+            <a href="https://wa.me/919669954789">
+                <i class="fa-brands fa-whatsapp"></i>
+                WhatsApp : +91 96699 54789
+            </a>
+
+            <a href="mailto:airoskyinstitute@gmail.com">
+                <i class="fa-solid fa-envelope"></i>
+                airoskyinstitute@gmail.com
+            </a>
+
+        </div>
+
+        <!-- Button -->
+
+        <a href="#" class="mobile-enroll">
+
+            Enroll Now
+
+        </a>
+
+    </aside>
+
+</div>
+<!-- ===========================
+ ENQUIRY POPUP
+=========================== -->
+
+<div class="popup-overlay" id="popup">
+
+    <div class="popup-box">
+
+        <button class="close-popup" id="closePopup">
+
+            <i class="fa-solid fa-xmark"></i>
+
+        </button>
+
+        <div class="popup-left">
+
+            <h2>Let's Build Your Career</h2>
+
+            <p>
+
+                Fill in your details and our admission counsellor
+                will contact you shortly.
+
+            </p>
+
+            <div class="popup-feature">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+                Free Career Counselling
+
+            </div>
+
+            <div class="popup-feature">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+                Placement Assistance
+
+            </div>
+
+            <div class="popup-feature">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+                Industry Certifications
+
+            </div>
+
+        </div>
+
+        <div class="popup-right">
+
+            <form>
+
+                <div class="input-box">
+
+                    <i class="fa-solid fa-user"></i>
+
+                    <input
+                    type="text"
+                    placeholder="Full Name"
+                    required>
+
+                </div>
+
+                <div class="input-box">
+
+                    <i class="fa-solid fa-phone"></i>
+
+                    <input
+                    type="tel"
+                    placeholder="Mobile Number"
+                    required>
+
+                </div>
+
+                <div class="input-box">
+
+                    <i class="fa-solid fa-envelope"></i>
+
+                    <input
+                    type="email"
+                    placeholder="Email Address">
+
+                </div>
+
+                <div class="input-box">
+
+                    <i class="fa-solid fa-book"></i>
+
+                    <select>
+
+                        <option>Select Course</option>
+
+                        <option>Fire & Safety</option>
+
+                        <option>Industrial Safety</option>
+
+                        <option>NEBOSH</option>
+
+                        <option>IOSH</option>
+
+                        <option>Diploma</option>
+
+                    </select>
+
+                </div>
+
+                <textarea
+                placeholder="Message (Optional)"
+                rows="4"></textarea>
+
+                <button type="submit" class="submit-btn">
+
+                    Submit Enquiry
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+</header>
+<!--=========================================
+PLACEMENT HERO
+==========================================-->
+
+<section class="placement-hero">
+
+    <div class="placement-overlay"></div>
+
+    <div class="container placement-hero-content">
+
+        <span class="page-tag">
+
+            Placement Assistance
+
+        </span>
+
+        <h1>
+
+            Your Career Starts
+            With AEROSKY
+
+        </h1>
+
+        <p>
+
+            We prepare students with industry-focused practical training,
+            professional certifications, interview preparation and dedicated
+            placement assistance for rewarding careers in Fire & Industrial Safety.
+
+        </p>
+
+        <div class="placement-buttons">
+
+            <a href="#" class="hero-btn-primary">
+
+                Explore Placements
+
+            </a>
+
+            <a href="#" class="hero-btn-secondary">
+
+                Contact Placement Cell
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!--=========================================
+PLACEMENT STATISTICS
+==========================================-->
+
+<section class="placement-stats">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <span class="section-tag">
+
+                Placement Highlights
+
+            </span>
+
+            <h2>
+
+                Building Successful Careers
+
+            </h2>
+
+            <p class="section-subtitle">
+
+                We focus on developing industry-ready professionals through
+                practical training, skill development and continuous career guidance.
+
+            </p>
+
+        </div>
+
+        <div class="stats-grid">
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+
+                    🎓
+
+                </div>
+
+                <h3>
+
+                    750+
+
+                </h3>
+
+                <span>
+
+                    Students Trained
+
+                </span>
+
+            </div>
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+
+                    💼
+
+                </div>
+
+                <h3>
+
+                    100%
+
+                </h3>
+
+                <span>
+
+                    Placement Support
+
+                </span>
+
+            </div>
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+
+                    🏭
+
+                </div>
+
+                <h3>
+
+                    150+
+
+                </h3>
+
+                <span>
+
+                    Hiring Companies
+
+                </span>
+
+            </div>
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+
+                    🌎
+
+                </div>
+
+                <h3>
+
+                    India & Abroad
+
+                </h3>
+
+                <span>
+
+                    Career Opportunities
+
+                </span>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+<!--=========================================
+WHY CHOOSE OUR PLACEMENT CELL
+==========================================-->
+
+<section class="placement-cell">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <span class="section-tag">
+
+                Placement Cell
+
+            </span>
+
+            <h2>
+
+                Why Choose Our
+                Placement Cell?
+
+            </h2>
+
+            <p class="section-subtitle">
+
+                Our dedicated placement team works continuously to prepare
+                students for successful careers through professional
+                development, industry exposure and career guidance.
+
+            </p>
+
+        </div>
+
+        <div class="placement-grid">
+
+            <!-- Card -->
+
+            <div class="placement-card">
+
+                <div class="placement-icon">
+
+                    🎯
+
+                </div>
+
+                <h3>
+
+                    Placement-Focused Training
+
+                </h3>
+
+                <p>
+
+                    Every course is designed according to current
+                    industry requirements so students become
+                    job-ready with practical knowledge and
+                    professional skills.
+
+                </p>
+
+            </div>
+
+            <!-- Card -->
+
+            <div class="placement-card">
+
+                <div class="placement-icon">
+
+                    📄
+
+                </div>
+
+                <h3>
+
+                    Resume Building
+
+                </h3>
+
+                <p>
+
+                    Professional resume creation, profile optimization
+                    and career guidance to improve your chances of
+                    getting selected.
+
+                </p>
+
+            </div>
+
+            <!-- Card -->
+
+            <div class="placement-card">
+
+                <div class="placement-icon">
+
+                    🎤
+
+                </div>
+
+                <h3>
+
+                    Mock Interviews
+
+                </h3>
+
+                <p>
+
+                    Practice interviews conducted by experienced HR
+                    professionals to build confidence and improve
+                    interview performance.
+
+                </p>
+
+            </div>
+
+            <!-- Card -->
+
+            <div class="placement-card">
+
+                <div class="placement-icon">
+
+                    💬
+
+                </div>
+
+                <h3>
+
+                    Communication Skills
+
+                </h3>
+
+                <p>
+
+                    Personality development, professional communication,
+                    English speaking and email writing sessions for
+                    workplace success.
+
+                </p>
+
+            </div>
+
+            <!-- Card -->
+
+            <div class="placement-card">
+
+                <div class="placement-icon">
+
+                    🤝
+
+                </div>
+
+                <h3>
+
+                    Industry Connections
+
+                </h3>
+
+                <p>
+
+                    Strong relationships with industries, construction
+                    companies, manufacturing plants and corporate
+                    organizations.
+
+                </p>
+
+            </div>
+
+            <!-- Card -->
+
+            <div class="placement-card">
+
+                <div class="placement-icon">
+
+                    🚀
+
+                </div>
+
+                <h3>
+
+                    Lifetime Career Support
+
+                </h3>
+
+                <p>
+
+                    Our support continues even after course completion
+                    through career guidance, interview opportunities
+                    and professional advice.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!--=========================================
+PLACEMENT PROCESS
+==========================================-->
+
+<section class="placement-process">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <span class="section-tag">
+
+                Placement Process
+
+            </span>
+
+            <h2>
+
+                Your Journey To Success
+
+            </h2>
+
+        </div>
+
+        <div class="process-wrapper">
+
+            <div class="process-step">
+
+                <span>01</span>
+
+                <h4>
+
+                    Professional Training
+
+                </h4>
+
+            </div>
+
+            <div class="process-step">
+
+                <span>02</span>
+
+                <h4>
+
+                    Skill Development
+
+                </h4>
+
+            </div>
+
+            <div class="process-step">
+
+                <span>03</span>
+
+                <h4>
+
+                    Resume Preparation
+
+                </h4>
+
+            </div>
+
+            <div class="process-step">
+
+                <span>04</span>
+
+                <h4>
+
+                    Mock Interview
+
+                </h4>
+
+            </div>
+
+            <div class="process-step">
+
+                <span>05</span>
+
+                <h4>
+
+                    Final Placement
+
+                </h4>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<footer class="footer">
+
+    <div class="container">
+
+        <div class="footer-grid">
+
+            <!-- Column 1 -->
+
+            <div class="footer-col">
+
+                <img src="logo.png"
+                     alt="Logo"
+                     class="footer-logo">
+
+                <h3>
+                    <span class="brand-name">AiRosKy</span> Institute of Fire &
+                    Safety Excellence
+                </h3>
+
+                <p>
+                    Empowering future safety professionals through
+                    world-class education and practical training.
+                </p>
+
+            </div>
+
+            <!-- Column 2 -->
+
+            <div class="footer-col">
+
+                <h4>Quick Links</h4>
+
+                <ul>
+
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Courses</a></li>
+                    <li><a href="#">Placements</a></li>
+                    <li><a href="#">Contact</a></li>
+
+                </ul>
+
+            </div>
+
+            <!-- Column 3 -->
+
+            <div class="footer-col">
+
+                <h4>Courses</h4>
+
+                <ul>
+
+                    <li><a href="#">Fire & Safety</a></li>
+                    <li><a href="#">Industrial Safety</a></li>
+                    <li><a href="#">NEBOSH</a></li>
+                    <li><a href="#">IOSH</a></li>
+                    <li><a href="#">HSE Officer</a></li>
+
+                </ul>
+
+            </div>
+
+            <!-- Column 4 -->
+
+            <div class="footer-col">
+
+                <h4>Contact Info</h4>
+
+                <p>📞 +91 96699 54789</p>
+
+                <p>✉ airoskyinstitute@gmail.com</p>
+
+                <p>
+                    📍 Ratlam, Madhya Pradesh, India
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+
+            <p>
+                © 2026 <span class="brand-name">AiRosKy</span> Institute of Fire & Safety Excellence.
+                All Rights Reserved.
+            </p>
+
+        </div>
+
+    </div>
+
+</footer>
+
+<button id="topBtn">
+    ↑
+</button>
+<script src="../back.js"></script>
+</body>
+</html>
