@@ -1,6 +1,9 @@
 import os
 import smtplib
 from email.message import EmailMessage
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # =====================================================
 # AIRO Institute - Email Service
@@ -10,12 +13,12 @@ from email.message import EmailMessage
 SMTP_SERVER = "smtp.gmail.com"
 SMTP_PORT = 587
 
-# Sender Email
-EMAIL = "hashmikhan847@gmail.com"
-PASSWORD = "rpkk kgxc mbzu tteu"
+# Sender Email - Use environment variables for security
+EMAIL = os.getenv("EMAIL", "hashmikhan847@gmail.com")
+PASSWORD = os.getenv("EMAIL_PASSWORD", "rpkk kgxc mbzu tteu")
 
 # Institute Email (to receive enrollment notifications)
-INSTITUTE_EMAIL = "hashmikhan847@gmail.com"
+INSTITUTE_EMAIL = os.getenv("INSTITUTE_EMAIL", "hashmikhan847@gmail.com")
 
 # Project Paths
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))

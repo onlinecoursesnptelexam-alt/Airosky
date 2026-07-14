@@ -72,8 +72,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "https://airoskyinstitute.com",
-        "https://www.airoskyinstitute.com",
-        "*"
+        "https://www.airoskyinstitute.com"
     ],
     allow_credentials=True,
     allow_methods=["*"],
