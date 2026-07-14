@@ -1,6 +1,5 @@
 import os
-import smtplib
-from email.message import EmailMessage
+import base64
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -9,16 +8,22 @@ load_dotenv()
 # AIRO Institute - Email Service
 # =====================================================
 
-# Gmail SMTP Configuration
-SMTP_SERVER = "smtp.gmail.com"
-SMTP_PORT = 587
-
-# Sender Email - Use environment variables for security
-EMAIL = os.getenv("EMAIL", "hashmikhan847@gmail.com")
-PASSWORD = os.getenv("EMAIL_PASSWORD", "rpkk kgxc mbzu tteu")
-
-# Institute Email (to receive enrollment notifications)
+# Email Configuration - Use SendGrid for Render compatibility
+# Get SendGrid API key from environment variables
+SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY", "")
+SENDER_EMAIL = os.getenv("SENDER_EMAIL", "hashmikhan847@gmail.com")
 INSTITUTE_EMAIL = os.getenv("INSTITUTE_EMAIL", "hashmikhan847@gmail.com")
+
+# Fallback to SMTP if SendGrid not configured (for local development)
+USE_SENDGRID = bool(SENDGRID_API_KEY)
+
+if not USE_SENDGRID:
+    import smtplib
+    from email.message import EmailMessage
+    SMTP_SERVER = "smtp.gmail.com"
+    SMTP_PORT = 587
+    EMAIL = os.getenv("EMAIL", "hashmikhan847@gmail.com")
+    PASSWORD = os.getenv("EMAIL_PASSWORD", "rpkk kgxc mbzu tteu")
 
 # Project Paths
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -47,14 +52,79 @@ def send_enrollment_email(
         print(f"PDF not found: {pdf_path}")
         return False
 
-    # Create Email
-    msg = EmailMessage()
+    # Use SendGrid if API key is available (Render compatible)
+    if USE_SENDGRID:
+        try:
+            import sendgrid
+            from sendgrid.helpers.mail import Mail, Attachment, FileContent, FileName, FileType, Disposition
 
-    msg["Subject"] = f"AIRO Institute | Enrollment Confirmation ({enrollment_id})"
-    msg["From"] = EMAIL
-    msg["To"] = student_email
+            sg = sendgrid.SendGridAPIClient(api_key=SENDGRID_API_KEY)
 
-    msg.set_content(f"""
+            # Read PDF file
+            with open(pdf_path, "rb") as f:
+                pdf_data = f.read()
+                pdf_base64 = base64.b64encode(pdf_data).decode()
+
+            # Create email
+            message = Mail(
+                from_email=SENDER_EMAIL,
+                to_emails=student_email,
+                subject=f"AIRO Institute | Enrollment Confirmation ({enrollment_id})",
+                html_content=f"""
+                <h2>Dear {student_name},</h2>
+                <p>Greetings from AIRO Institute!</p>
+                <p><strong>Congratulations!</strong></p>
+                <p>Your enrollment has been completed successfully.</p>
+                <h3>Enrollment ID: {enrollment_id}</h3>
+                <p>Please find your Enrollment PDF attached with this email.</p>
+                <p>Kindly keep this document safe, as it may be required for future verification and reference.</p>
+                <p>If you have any questions or need assistance, feel free to contact us.</p>
+                <p>We wish you success in your learning journey.</p>
+                <hr>
+                <p><strong>AIRO Institute</strong></p>
+                <p>Website: https://airoinstitute.in</p>
+                <p>Email: support@airoinstitute.in</p>
+                <p>Thank you for choosing AIRO Institute.</p>
+                """
+            )
+
+            # Attach PDF
+            attachment = Attachment(
+                FileContent(pdf_base64),
+                FileName(pdf_filename),
+                FileType('application/pdf'),
+                Disposition('attachment')
+            )
+            message.add_attachment(attachment)
+
+            response = sg.send(message)
+
+            print("======================================")
+            print("SendGrid Email sent successfully.")
+            print("Student :", student_name)
+            print("Email   :", student_email)
+            print("PDF     :", pdf_filename)
+            print("======================================")
+
+            return True
+
+        except Exception as e:
+            print("======================================")
+            print("SendGrid Email sending failed.")
+            print(e)
+            print("======================================")
+            return False
+
+    # Fallback to SMTP for local development
+    else:
+        try:
+            msg = EmailMessage()
+
+            msg["Subject"] = f"AIRO Institute | Enrollment Confirmation ({enrollment_id})"
+            msg["From"] = EMAIL
+            msg["To"] = student_email
+
+            msg.set_content(f"""
 Dear {student_name},
 
 Greetings from AIRO Institute!
@@ -89,37 +159,35 @@ Thank you for choosing AIRO Institute.
 --------------------------------------------------
 """)
 
-    # Attach PDF
-    with open(pdf_path, "rb") as pdf:
-        msg.add_attachment(
-            pdf.read(),
-            maintype="application",
-            subtype="pdf",
-            filename=pdf_filename
-        )
+            # Attach PDF
+            with open(pdf_path, "rb") as pdf:
+                msg.add_attachment(
+                    pdf.read(),
+                    maintype="application",
+                    subtype="pdf",
+                    filename=pdf_filename
+                )
 
-    try:
-        with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
-            server.starttls()
-            server.login(EMAIL, PASSWORD)
-            server.send_message(msg)
+            with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
+                server.starttls()
+                server.login(EMAIL, PASSWORD)
+                server.send_message(msg)
 
-        print("======================================")
-        print("Email sent successfully.")
-        print("Student :", student_name)
-        print("Email   :", student_email)
-        print("PDF     :", pdf_filename)
-        print("======================================")
+            print("======================================")
+            print("SMTP Email sent successfully.")
+            print("Student :", student_name)
+            print("Email   :", student_email)
+            print("PDF     :", pdf_filename)
+            print("======================================")
 
-        return True
+            return True
 
-    except Exception as e:
-        print("======================================")
-        print("Email sending failed.")
-        print(e)
-        print("======================================")
-
-        return False
+        except Exception as e:
+            print("======================================")
+            print("SMTP Email sending failed.")
+            print(e)
+            print("======================================")
+            return False
 
 
 def send_institute_notification_email(
@@ -144,14 +212,74 @@ def send_institute_notification_email(
         print(f"PDF not found: {pdf_path}")
         return False
 
-    # Create Email
-    msg = EmailMessage()
+    # Use SendGrid if API key is available (Render compatible)
+    if USE_SENDGRID:
+        try:
+            import sendgrid
+            from sendgrid.helpers.mail import Mail, Attachment, FileContent, FileName, FileType, Disposition
 
-    msg["Subject"] = f"New Enrollment: {student_name} ({enrollment_id})"
-    msg["From"] = EMAIL
-    msg["To"] = INSTITUTE_EMAIL
+            sg = sendgrid.SendGridAPIClient(api_key=SENDGRID_API_KEY)
 
-    msg.set_content(f"""
+            # Read PDF file
+            with open(pdf_path, "rb") as f:
+                pdf_data = f.read()
+                pdf_base64 = base64.b64encode(pdf_data).decode()
+
+            # Create email
+            message = Mail(
+                from_email=SENDER_EMAIL,
+                to_emails=INSTITUTE_EMAIL,
+                subject=f"New Enrollment: {student_name} ({enrollment_id})",
+                html_content=f"""
+                <h2>Dear Institute Administration,</h2>
+                <p>A new student has enrolled successfully.</p>
+                <h3>Student Details:</h3>
+                <p><strong>Name:</strong> {student_name}</p>
+                <p><strong>Email:</strong> {student_email}</p>
+                <p><strong>Enrollment ID:</strong> {enrollment_id}</p>
+                <p>Please find the enrollment PDF attached with this email for your records.</p>
+                <hr>
+                <p><strong>AIRO Institute</strong></p>
+                """
+            )
+
+            # Attach PDF
+            attachment = Attachment(
+                FileContent(pdf_base64),
+                FileName(pdf_filename),
+                FileType('application/pdf'),
+                Disposition('attachment')
+            )
+            message.add_attachment(attachment)
+
+            response = sg.send(message)
+
+            print("======================================")
+            print("SendGrid Institute notification email sent successfully.")
+            print("Student :", student_name)
+            print("Email   :", student_email)
+            print("PDF     :", pdf_filename)
+            print("======================================")
+
+            return True
+
+        except Exception as e:
+            print("======================================")
+            print("SendGrid Institute notification email sending failed.")
+            print(e)
+            print("======================================")
+            return False
+
+    # Fallback to SMTP for local development
+    else:
+        try:
+            msg = EmailMessage()
+
+            msg["Subject"] = f"New Enrollment: {student_name} ({enrollment_id})"
+            msg["From"] = EMAIL
+            msg["To"] = INSTITUTE_EMAIL
+
+            msg.set_content(f"""
 Dear Institute Administration,
 
 A new student has enrolled successfully.
@@ -171,37 +299,35 @@ AIRO Institute
 --------------------------------------------------
 """)
 
-    # Attach PDF
-    with open(pdf_path, "rb") as pdf:
-        msg.add_attachment(
-            pdf.read(),
-            maintype="application",
-            subtype="pdf",
-            filename=pdf_filename
-        )
+            # Attach PDF
+            with open(pdf_path, "rb") as pdf:
+                msg.add_attachment(
+                    pdf.read(),
+                    maintype="application",
+                    subtype="pdf",
+                    filename=pdf_filename
+                )
 
-    try:
-        with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
-            server.starttls()
-            server.login(EMAIL, PASSWORD)
-            server.send_message(msg)
+            with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
+                server.starttls()
+                server.login(EMAIL, PASSWORD)
+                server.send_message(msg)
 
-        print("======================================")
-        print("Institute notification email sent successfully.")
-        print("Student :", student_name)
-        print("Email   :", student_email)
-        print("PDF     :", pdf_filename)
-        print("======================================")
+            print("======================================")
+            print("SMTP Institute notification email sent successfully.")
+            print("Student :", student_name)
+            print("Email   :", student_email)
+            print("PDF     :", pdf_filename)
+            print("======================================")
 
-        return True
+            return True
 
-    except Exception as e:
-        print("======================================")
-        print("Institute notification email sending failed.")
-        print(e)
-        print("======================================")
-
-        return False
+        except Exception as e:
+            print("======================================")
+            print("SMTP Institute notification email sending failed.")
+            print(e)
+            print("======================================")
+            return False
 
 
 # =====================================================
