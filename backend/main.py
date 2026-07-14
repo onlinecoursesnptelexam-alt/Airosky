@@ -130,8 +130,11 @@ def submit(
 ):
 
     try:
+        print(f"Starting enrollment process for: {student_name}")
+        
         # Generate automatic registration number
         reg_number = generate_registration_number()
+        print(f"Generated registration number: {reg_number}")
 
         # Save uploaded photo
         photo_extension = photo.filename.split('.')[-1]
@@ -140,6 +143,7 @@ def submit(
 
         with open(photo_path, "wb") as buffer:
             shutil.copyfileobj(photo.file, buffer)
+        print(f"Photo saved to: {photo_path}")
 
         # Save passport photo if provided
         passport_photo_path = None
@@ -162,6 +166,7 @@ def submit(
                 shutil.copyfileobj(signature.file, buffer)
 
         # Generate PDF with new naming convention: STUDENTNAME-AIR-DDMMYY-XXXXX
+        print("Starting PDF generation...")
         pdf_name = generate_pdf(
             student_name,
             date_of_birth,
@@ -190,6 +195,7 @@ def submit(
             passing_year,
             signature_path
         )
+        print(f"PDF generated: {pdf_name}")
 
         # Rename PDF to new format: STUDENTNAME-AIR-DDMMYY-XXXXX
         old_pdf_path = os.path.join(BASE_DIR, "generated_pdfs", pdf_name)
@@ -198,28 +204,37 @@ def submit(
 
         if os.path.exists(old_pdf_path):
             os.rename(old_pdf_path, new_pdf_path)
+            print(f"PDF renamed to: {new_pdf_name}")
+        else:
+            print(f"Warning: PDF not found at {old_pdf_path}")
 
         # Send emails in background - don't wait for them to complete
         def send_emails():
             try:
-                send_enrollment_email(
+                print(f"Sending enrollment email to: {email}")
+                email_result = send_enrollment_email(
                     student_name=student_name,
                     student_email=email,
                     enrollment_id=reg_number,
                     pdf_filename=new_pdf_name
                 )
-                send_institute_notification_email(
+                print(f"Enrollment email result: {email_result}")
+                
+                print(f"Sending institute notification email")
+                institute_result = send_institute_notification_email(
                     student_name=student_name,
                     student_email=email,
                     enrollment_id=reg_number,
                     pdf_filename=new_pdf_name
                 )
+                print(f"Institute email result: {institute_result}")
             except Exception as e:
                 print(f"Error sending emails: {e}")
 
         background_tasks.add_task(send_emails)
 
         # Return immediately with registration ID after PDF generation
+        print(f"Enrollment completed successfully for: {reg_number}")
         return {
             "status": "success",
             "message": "PDF Generated Successfully",
@@ -229,7 +244,9 @@ def submit(
 
     except Exception as e:
 
-        print("ERROR:", e)
+        print("ERROR in enrollment process:", e)
+        import traceback
+        traceback.print_exc()
 
         return {
             "status": "error",
@@ -243,10 +260,14 @@ def download_pdf(pdf_filename: str):
     Download PDF by filename
     """
     pdf_path = os.path.join(PDF_FOLDER, pdf_filename)
+    print(f"PDF download request for: {pdf_filename}")
+    print(f"Looking for PDF at: {pdf_path}")
     
     if not os.path.exists(pdf_path):
+        print(f"PDF not found at: {pdf_path}")
         return {"status": "error", "message": "PDF not found"}
     
+    print(f"PDF found, serving file")
     return FileResponse(
         path=pdf_path,
         filename=pdf_filename,
