@@ -30,6 +30,10 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 PDF_FOLDER = os.path.join(BASE_DIR, "generated_pdfs")
 os.makedirs(PDF_FOLDER, exist_ok=True)
 
+# Certificates folder for static serving
+CERTIFICATES_FOLDER = os.path.join(BASE_DIR, "certificates")
+os.makedirs(CERTIFICATES_FOLDER, exist_ok=True)
+
 # Counter file for registration numbers
 COUNTER_FILE = os.path.join(BASE_DIR, "registration_counter.txt")
 
@@ -82,7 +86,7 @@ app.add_middleware(
 # Serve PDF Certificates
 app.mount(
     "/certificates",
-    StaticFiles(directory="certificates"),
+    StaticFiles(directory=CERTIFICATES_FOLDER),
     name="certificates"
 )
 
