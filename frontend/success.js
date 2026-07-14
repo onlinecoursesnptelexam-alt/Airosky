@@ -387,6 +387,18 @@ function downloadPDF() {
 
 function goToHome() {
     try {
+        // Clear all enrollment-related localStorage data
+        localStorage.removeItem("formData");
+        localStorage.removeItem("hasFiles");
+        localStorage.removeItem("photoFile");
+        localStorage.removeItem("passportPhotoFile");
+        localStorage.removeItem("signatureFile");
+        localStorage.removeItem("registrationNumber");
+        localStorage.removeItem("pdfUrl");
+        localStorage.removeItem("studentName");
+        localStorage.removeItem("studentEmail");
+        localStorage.removeItem("registrationStatus");
+        
         window.location.href = "../index.html";
     } catch (error) {
         console.error("Navigation error:", error);
@@ -507,11 +519,23 @@ function setupEventListeners() {
 function init() {
     try {
         setupEventListeners();
-        startProgress();
-        startMessageAnimation();
         
-        // Submit form in background
-        submitFormInBackground();
+        // Check if registration is already completed
+        const registrationStatus = localStorage.getItem("registrationStatus");
+        const registrationNumber = localStorage.getItem("registrationNumber");
+        
+        if (registrationStatus === "success" && registrationNumber) {
+            // Registration already completed - show success screen directly
+            updateRegistrationNumber();
+            transitionToSuccess();
+        } else {
+            // New registration - show loading animation
+            startProgress();
+            startMessageAnimation();
+            
+            // Submit form in background
+            submitFormInBackground();
+        }
     } catch (error) {
         console.error("Initialization error:", error);
     }
