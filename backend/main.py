@@ -5,8 +5,12 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 import os
 import shutil
+import sys
 from datetime import datetime
 from sqlalchemy.orm import Session
+
+# Add backend directory to Python path
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from pdf_generator import generate_pdf
 from email_service import send_enrollment_email, send_institute_notification_email
