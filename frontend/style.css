@@ -30,6 +30,15 @@ html, body{
     overflow-x:hidden;
 }
 
+/* ==========================
+   PAGE TOP PADDING FOR NAVBAR
+========================== */
+
+body > section:not(.hero):not(.placement-hero):not(.contact-hero),
+body > main{
+    padding-top:90px;
+}
+
 body.no-scroll,
 html.no-scroll{
     overflow:hidden !important;
