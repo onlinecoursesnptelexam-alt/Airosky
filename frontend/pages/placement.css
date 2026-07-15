@@ -143,6 +143,12 @@ PLACEMENT STATS
 
     margin-top:60px;
 
+    max-width:1200px;
+
+    margin-left:auto;
+
+    margin-right:auto;
+
 }
 
 .stat-card{
@@ -196,6 +202,154 @@ PLACEMENT STATS
     font-size:17px;
 
     font-weight:500;
+
+}
+
+/*==================================
+PLACEMENT CELL
+==================================*/
+
+.placement-cell{
+
+    padding:120px 0;
+
+    background:#fff;
+
+}
+
+.placement-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:30px;
+
+    margin-top:60px;
+
+}
+
+.placement-card{
+
+    background:#F7F5EF;
+
+    padding:40px;
+
+    border-radius:20px;
+
+    text-align:center;
+
+    transition:.4s;
+
+    border:1px solid #E5E7EB;
+
+}
+
+.placement-card:hover{
+
+    transform:translateY(-10px);
+
+    box-shadow:0 25px 50px rgba(0,0,0,.10);
+
+}
+
+.placement-icon{
+
+    font-size:55px;
+
+    margin-bottom:20px;
+
+}
+
+.placement-card h3{
+
+    color:#1B2A6B;
+
+    font-size:22px;
+
+    margin-bottom:15px;
+
+}
+
+.placement-card p{
+
+    color:#6B7280;
+
+    line-height:1.8;
+
+}
+
+/*==================================
+PLACEMENT PROCESS
+==================================*/
+
+.placement-process{
+
+    padding:120px 0;
+
+    background:#F7F5EF;
+
+}
+
+.process-wrapper{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-top:60px;
+
+    gap:20px;
+
+}
+
+.process-step{
+
+    flex:1;
+
+    text-align:center;
+
+    padding:30px 20px;
+
+    background:#fff;
+
+    border-radius:15px;
+
+    position:relative;
+
+}
+
+.process-step span{
+
+    display:block;
+
+    width:60px;
+
+    height:60px;
+
+    background:#F5A623;
+
+    color:#fff;
+
+    border-radius:50%;
+
+    line-height:60px;
+
+    font-size:24px;
+
+    font-weight:700;
+
+    margin:0 auto 20px;
+
+}
+
+.process-step h4{
+
+    color:#1B2A6B;
+
+    font-size:18px;
 
 }
 
@@ -274,6 +428,46 @@ padding:30px;
 .stat-card h3{
 
 font-size:34px;
+
+}
+
+.placement-cell{
+
+padding:80px 0;
+
+}
+
+.placement-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.placement-card{
+
+padding:30px;
+
+}
+
+.placement-process{
+
+padding:80px 0;
+
+}
+
+.process-wrapper{
+
+flex-direction:column;
+
+gap:30px;
+
+}
+
+.process-step{
+
+width:100%;
+
+text-align:center;
 
 }
 
