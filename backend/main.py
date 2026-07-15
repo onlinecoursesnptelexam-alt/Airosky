@@ -82,7 +82,8 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "https://airoskyinstitute.com",
-        "https://www.airoskyinstitute.com"
+        "https://www.airoskyinstitute.com",
+        "*"
     ],
     allow_credentials=True,
     allow_methods=["*"],
@@ -389,3 +390,170 @@ def list_certificates(db: Session = Depends(get_db)):
             for cert in certificates
         ]
     }
+
+
+# ------------------------------------
+# Certificate Statistics (Admin)
+# ------------------------------------
+
+@app.get("/api/certificates/stats")
+def get_statistics(db: Session = Depends(get_db)):
+    certificates = db.query(Certificate).all()
+    
+    return {
+        "total_students": len(certificates),
+        "total_certificates": len(certificates),
+        "total_pdfs": len(certificates)
+    }
+
+
+# ------------------------------------
+# Get All Certificates (Admin - Public)
+# ------------------------------------
+
+@app.get("/api/certificates")
+def get_all_certificates(db: Session = Depends(get_db)):
+    certificates = db.query(Certificate).all()
+    return [
+        {
+            "certificate_id": cert.certificate_id,
+            "student_name": cert.student_name,
+            "father_name": cert.father_name,
+            "course": cert.course,
+            "duration": cert.duration,
+            "issue_date": cert.issue_date,
+            "status": cert.status,
+            "certificate": cert.certificate
+        }
+        for cert in certificates
+    ]
+
+
+# ------------------------------------
+# Upload Certificate (Admin)
+# ------------------------------------
+
+@app.post("/api/certificates/upload")
+def upload_certificate(
+    certificate_id: str = Form(...),
+    student_name: str = Form(...),
+    father_name: str = Form(...),
+    course: str = Form(...),
+    duration: str = Form(...),
+    issue_date: str = Form(...),
+    certificate_file: UploadFile = File(...),
+    db: Session = Depends(get_db)
+):
+    # Check if certificate already exists
+    existing = db.query(Certificate).filter(
+        Certificate.certificate_id == certificate_id
+    ).first()
+    
+    if existing:
+        raise HTTPException(
+            status_code=400,
+            detail="Certificate ID already exists"
+        )
+    
+    # Save PDF file to certificates folder
+    file_extension = certificate_file.filename.split('.')[-1]
+    if file_extension.lower() != 'pdf':
+        raise HTTPException(
+            status_code=400,
+            detail="Only PDF files are allowed"
+        )
+    
+    pdf_filename = f"{certificate_id}.pdf"
+    pdf_path = os.path.join(CERTIFICATES_FOLDER, pdf_filename)
+    
+    with open(pdf_path, "wb") as buffer:
+        shutil.copyfileobj(certificate_file.file, buffer)
+    
+    # Create new certificate record
+    new_certificate = Certificate(
+        certificate_id=certificate_id,
+        student_name=student_name,
+        father_name=father_name,
+        course=course,
+        duration=duration,
+        issue_date=issue_date,
+        status="Active",
+        certificate=pdf_filename
+    )
+    
+    db.add(new_certificate)
+    db.commit()
+    db.refresh(new_certificate)
+    
+    return {
+        "status": "success",
+        "message": "Certificate uploaded successfully",
+        "certificate": {
+            "certificate_id": new_certificate.certificate_id,
+            "student_name": new_certificate.student_name
+        }
+    }
+
+
+# ------------------------------------
+# Delete Certificate (Admin)
+# ------------------------------------
+
+@app.delete("/api/certificates/{certificate_id}")
+def delete_certificate(
+    certificate_id: str,
+    db: Session = Depends(get_db)
+):
+    certificate = db.query(Certificate).filter(
+        Certificate.certificate_id == certificate_id
+    ).first()
+    
+    if certificate is None:
+        raise HTTPException(
+            status_code=404,
+            detail="Certificate Not Found"
+        )
+    
+    # Delete PDF file if exists
+    pdf_path = os.path.join(CERTIFICATES_FOLDER, certificate.certificate)
+    if os.path.exists(pdf_path):
+        os.remove(pdf_path)
+    
+    # Delete from database
+    db.delete(certificate)
+    db.commit()
+    
+    return {
+        "status": "success",
+        "message": "Certificate deleted successfully"
+    }
+
+
+# ------------------------------------
+# Search Certificates (Admin)
+# ------------------------------------
+
+@app.get("/api/certificates/search")
+def search_certificates(
+    q: str,
+    db: Session = Depends(get_db)
+):
+    search_term = f"%{q}%"
+    certificates = db.query(Certificate).filter(
+        (Certificate.certificate_id.like(search_term)) |
+        (Certificate.student_name.like(search_term))
+    ).all()
+    
+    return [
+        {
+            "certificate_id": cert.certificate_id,
+            "student_name": cert.student_name,
+            "father_name": cert.father_name,
+            "course": cert.course,
+            "duration": cert.duration,
+            "issue_date": cert.issue_date,
+            "status": cert.status,
+            "certificate": cert.certificate
+        }
+        for cert in certificates
+    ]

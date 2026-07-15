@@ -352,6 +352,32 @@ img{
 
 }
 
+/*==========================
+ADMIN LINK
+==========================*/
+
+.admin-link{
+
+    color:#E05A0C !important;
+
+    font-weight:700 !important;
+
+    background:rgba(224,90,12,.1);
+
+    padding:8px 16px;
+
+    border-radius:8px;
+
+}
+
+.admin-link:hover{
+
+    background:rgba(224,90,12,.2);
+
+    color:#E05A0C !important;
+
+}
+
 /* ==========================
    MOBILE MENU
 ========================== */
