@@ -107,13 +107,13 @@ def generate_pdf(student_name, date_of_birth, gender, nationality, father_name, 
     pdf_path = os.path.join(PDF_FOLDER, filename)
 
     # Color scheme
-    BACKGROUND_COLOR = colors.HexColor('#F8E7D0')
-    YELLOW_HEADER = colors.HexColor('#F4B400')
-    ORANGE = colors.HexColor('#F68B00')
-    BLUE = colors.HexColor('#1B3C88')
-    BORDER_COLOR = colors.HexColor('#D89B00')
-    LABEL_BACKGROUND = colors.HexColor('#FFF2C6')
-    VALUE_BACKGROUND = colors.HexColor('#FFF8EE')
+    BACKGROUND_COLOR = colors.HexColor('#FFFFFF')
+    YELLOW_HEADER = colors.HexColor('#F97316')
+    ORANGE = colors.HexColor('#F97316')
+    BLUE = colors.HexColor('#F97316')
+    BORDER_COLOR = colors.HexColor('#D1D5DB')
+    LABEL_BACKGROUND = colors.HexColor('#FFFFFF')
+    VALUE_BACKGROUND = colors.HexColor('#FFFFFF')
     
     styles = getSampleStyleSheet()
     
@@ -133,7 +133,7 @@ def generate_pdf(student_name, date_of_birth, gender, nationality, father_name, 
         parent=styles['Normal'],
         fontName='Helvetica',
         fontSize=16,
-        textColor=colors.black,
+        textColor=colors.HexColor('#475569'),
         spaceAfter=2,
         alignment=1  # center
     )
@@ -153,7 +153,7 @@ def generate_pdf(student_name, date_of_birth, gender, nationality, father_name, 
         parent=styles['Heading3'],
         fontName='Helvetica-Bold',
         fontSize=20,
-        textColor=colors.black,
+        textColor=colors.HexColor('#475569'),
         spaceAfter=0,
         spaceBefore=0,
         alignment=0  # left
@@ -164,7 +164,7 @@ def generate_pdf(student_name, date_of_birth, gender, nationality, father_name, 
         parent=styles['Normal'],
         fontName='Helvetica-Bold',
         fontSize=11,
-        textColor=colors.black,
+        textColor=colors.HexColor('#475569'),
         alignment=0
     )
     
@@ -173,7 +173,7 @@ def generate_pdf(student_name, date_of_birth, gender, nationality, father_name, 
         parent=styles['Normal'],
         fontName='Helvetica',
         fontSize=11,
-        textColor=colors.black,
+        textColor=colors.HexColor('#111827'),
         alignment=0
     )
     
@@ -182,7 +182,7 @@ def generate_pdf(student_name, date_of_birth, gender, nationality, father_name, 
         parent=styles['Normal'],
         fontName='Helvetica',
         fontSize=16,
-        textColor=colors.black,
+        textColor=colors.HexColor('#111827'),
         alignment=0,
         leading=20
     )
@@ -192,7 +192,7 @@ def generate_pdf(student_name, date_of_birth, gender, nationality, father_name, 
         parent=styles['Heading3'],
         fontName='Helvetica-Bold',
         fontSize=24,
-        textColor=colors.black,
+        textColor=colors.HexColor('#475569'),
         spaceAfter=8,
         alignment=0
     )

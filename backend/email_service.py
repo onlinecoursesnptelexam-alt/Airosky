@@ -11,8 +11,8 @@ load_dotenv()
 # Email Configuration - Use SendGrid for Render compatibility
 # Get SendGrid API key from environment variables
 SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY", "")
-SENDER_EMAIL = os.getenv("SENDER_EMAIL", "hashmikhan847@gmail.com")
-INSTITUTE_EMAIL = os.getenv("INSTITUTE_EMAIL", "hashmikhan847@gmail.com")
+SENDER_EMAIL = os.getenv("SENDER_EMAIL", "info@airoskyinstitute.com")
+INSTITUTE_EMAIL = os.getenv("INSTITUTE_EMAIL", "info@airoskyinstitute.com")
 
 # Fallback to SMTP if SendGrid not configured (for local development)
 USE_SENDGRID = bool(SENDGRID_API_KEY)
@@ -22,7 +22,7 @@ if not USE_SENDGRID:
     from email.message import EmailMessage
     SMTP_SERVER = "smtp.gmail.com"
     SMTP_PORT = 587
-    EMAIL = os.getenv("EMAIL", "hashmikhan847@gmail.com")
+    EMAIL = os.getenv("EMAIL", "info@airoskyinstitute.com")
     PASSWORD = os.getenv("EMAIL_PASSWORD", "rpkk kgxc mbzu tteu")
 
 # Project Paths
