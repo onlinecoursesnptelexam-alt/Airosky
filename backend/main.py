@@ -10,6 +10,10 @@ from datetime import datetime
 import pytz
 from sqlalchemy.orm import Session
 
+from pydantic import BaseModel
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
+
 # Add backend directory to Python path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
@@ -44,6 +48,24 @@ COUNTER_FILE = os.path.join(BASE_DIR, "registration_counter.txt")
 
 # Base URL for certificate verification
 BASE_URL = "https://aerosky-institute-vvot.onrender.com"
+
+# ==========================
+# GOOGLE SHEETS CONFIGURATION
+# ==========================
+
+scope = [
+    "https://spreadsheets.google.com/feeds",
+    "https://www.googleapis.com/auth/drive"
+]
+
+creds = ServiceAccountCredentials.from_json_keyfile_name(
+    os.path.join(BASE_DIR, "credentials.json"),
+    scope
+)
+
+gs_client = gspread.authorize(creds)
+
+sheet = gs_client.open("AIROSKY ENQUIRIES").sheet1
 
 
 def generate_registration_number():
@@ -104,6 +126,12 @@ class Student(BaseModel):
     email: str
     age: int
 
+class Enquiry(BaseModel):
+    name: str
+    mobile: str
+    email: str
+    course: str
+    message: str
 
 @app.get("/")
 def home():
@@ -557,3 +585,45 @@ def search_certificates(
         }
         for cert in certificates
     ]
+
+    # ------------------------------------
+# Website Enquiry Form
+# ------------------------------------
+
+@app.post("/enquiry")
+def enquiry(data: Enquiry):
+
+    try:
+
+        ist = pytz.timezone("Asia/Kolkata")
+
+        sheet.append_row([
+
+            datetime.now(ist).strftime("%d-%m-%Y %H:%M"),
+
+            data.name,
+
+            data.mobile,
+
+            data.email,
+
+            data.course,
+
+            data.message
+
+        ])
+
+        return {
+
+            "status": "success",
+
+            "message": "Enquiry Submitted Successfully"
+
+        }
+
+    except Exception as e:
+
+        raise HTTPException(
+            status_code=500,
+            detail=str(e)
+        )

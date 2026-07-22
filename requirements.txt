@@ -9,3 +9,6 @@ pillow
 pillow-heif
 sendgrid
 pytz
+
+gspread
+oauth2client
