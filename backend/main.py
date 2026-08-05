@@ -1,0 +1,648 @@
+from fastapi import FastAPI, UploadFile, File, Form, BackgroundTasks, HTTPException, Depends
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
+from pydantic import BaseModel
+import os
+import shutil
+import sys
+from datetime import datetime
+import pytz
+from sqlalchemy.orm import Session
+
+# Add backend directory to Python path
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
+from pdf_generator import generate_pdf
+from email_service import send_enrollment_email, send_institute_notification_email
+from database import Base, engine, get_db
+from models import Certificate
+
+Base.metadata.create_all(bind=engine)
+
+app = FastAPI(
+    title="AEROSKY Institute API"
+)
+
+# Base directory
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# Upload folder for photos
+UPLOAD_FOLDER = os.path.join(BASE_DIR, "uploads")
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+
+# PDF folder
+PDF_FOLDER = os.path.join(BASE_DIR, "generated_pdfs")
+os.makedirs(PDF_FOLDER, exist_ok=True)
+
+# Certificates folder for static serving
+CERTIFICATES_FOLDER = os.path.join(BASE_DIR, "certificates")
+os.makedirs(CERTIFICATES_FOLDER, exist_ok=True)
+
+# Counter file for registration numbers
+COUNTER_FILE = os.path.join(BASE_DIR, "registration_counter.txt")
+
+# Enrollment status store for quick success-page updates
+ENROLLMENT_STATUS = {}
+
+# Base URL for certificate verification
+BASE_URL = "http://127.0.0.1:8000"
+
+
+def generate_registration_number():
+    """
+    Generate registration number in format: AIR-DDMMYY-XXXXX
+    Example: AIR-150726-00001
+    """
+    # Get current date in DDMMYY format (using IST timezone UTC+5:30)
+    ist_timezone = pytz.timezone('Asia/Kolkata')
+    current_date = datetime.now(ist_timezone).strftime("%d%m%y")
+    
+    # Read or initialize counter
+    if os.path.exists(COUNTER_FILE):
+        with open(COUNTER_FILE, "r") as f:
+            counter = int(f.read().strip())
+    else:
+        counter = 0
+    
+    # Increment counter
+    counter += 1
+    
+    # Save counter back to file
+    with open(COUNTER_FILE, "w") as f:
+        f.write(str(counter))
+    
+    # Format counter as 5-digit number with leading zeros
+    counter_str = f"{counter:05d}"
+    
+    # Generate registration number
+    reg_number = f"AIR-{current_date}-{counter_str}"
+    
+    return reg_number
+
+# Enable CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "https://airoskyinstitute.com",
+        "https://www.airoskyinstitute.com",
+        "*"
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Serve PDF Certificates
+app.mount(
+    "/certificates",
+    StaticFiles(directory=CERTIFICATES_FOLDER),
+    name="certificates"
+)
+
+
+class Student(BaseModel):
+    student_name: str
+    father_name: str
+    email: str
+    age: int
+
+
+@app.get("/")
+def home():
+    return {"message": "AEROSKY API Running Successfully"}
+
+
+def process_enrollment_task(
+    reg_number,
+    student_name,
+    date_of_birth,
+    gender,
+    nationality,
+    father_name,
+    mother_name,
+    parent_mobile,
+    email,
+    age,
+    photo_path,
+    village,
+    post_office,
+    district,
+    state,
+    pincode,
+    passport_photo_path,
+    mobile,
+    contact_email,
+    emergency_name,
+    emergency_mobile,
+    emergency_relation,
+    qualification,
+    board_college,
+    passing_year,
+    signature_path,
+):
+    try:
+        print(f"Starting PDF generation for: {reg_number}")
+        pdf_name = generate_pdf(
+            student_name,
+            date_of_birth,
+            gender,
+            nationality,
+            father_name,
+            mother_name,
+            parent_mobile,
+            email,
+            age,
+            photo_path,
+            village,
+            post_office,
+            district,
+            state,
+            pincode,
+            passport_photo_path,
+            reg_number,
+            mobile,
+            contact_email,
+            emergency_name,
+            emergency_mobile,
+            emergency_relation,
+            qualification,
+            board_college,
+            passing_year,
+            signature_path
+        )
+        print(f"PDF generated: {pdf_name}")
+
+        old_pdf_path = os.path.join(BASE_DIR, "generated_pdfs", pdf_name)
+        new_pdf_name = f"{student_name.replace(' ', '_')}-{reg_number}.pdf"
+        new_pdf_path = os.path.join(BASE_DIR, "generated_pdfs", new_pdf_name)
+
+        if os.path.exists(old_pdf_path):
+            os.rename(old_pdf_path, new_pdf_path)
+            print(f"PDF renamed to: {new_pdf_name}")
+        else:
+            print(f"Warning: PDF not found at {old_pdf_path}, using generated name directly")
+            new_pdf_name = pdf_name
+            new_pdf_path = old_pdf_path
+
+        email_result = send_enrollment_email(
+            student_name=student_name,
+            student_email=email,
+            enrollment_id=reg_number,
+            pdf_filename=new_pdf_name
+        )
+        institute_result = send_institute_notification_email(
+            student_name=student_name,
+            student_email=email,
+            enrollment_id=reg_number,
+            pdf_filename=new_pdf_name
+        )
+
+        ENROLLMENT_STATUS[reg_number] = {
+            "status": "completed",
+            "registration_number": reg_number,
+            "pdf_filename": new_pdf_name,
+            "pdf_url": f"/download-pdf/{new_pdf_name}",
+            "student_name": student_name,
+            "student_email": email,
+            "email_sent": email_result and institute_result,
+            "email_result": email_result,
+            "institute_email_result": institute_result,
+        }
+    except Exception as e:
+        print(f"Enrollment processing failed for {reg_number}: {e}")
+        import traceback
+        traceback.print_exc()
+        ENROLLMENT_STATUS[reg_number] = {
+            "status": "failed",
+            "registration_number": reg_number,
+            "student_name": student_name,
+            "student_email": email,
+            "error": str(e),
+        }
+
+
+@app.post("/submit")
+def submit(
+    background_tasks: BackgroundTasks,
+    student_name: str = Form(...),
+    date_of_birth: str = Form(...),
+    gender: str = Form(...),
+    nationality: str = Form(...),
+    father_name: str = Form(...),
+    mother_name: str = Form(...),
+    parent_mobile: str = Form(...),
+    email: str = Form(...),
+    age: int = Form(...),
+    photo: UploadFile = File(...),
+    village: str = Form(...),
+    post_office: str = Form(...),
+    district: str = Form(...),
+    state: str = Form(...),
+    pincode: str = Form(...),
+    passport_photo: UploadFile = File(None),
+    mobile: str = Form(...),
+    contact_email: str = Form(...),
+    emergency_name: str = Form(...),
+    emergency_mobile: str = Form(...),
+    emergency_relation: str = Form(...),
+    qualification: str = Form(...),
+    board_college: str = Form(...),
+    passing_year: str = Form(...),
+    signature: UploadFile = File(None)
+):
+
+    try:
+        print(f"Starting enrollment process for: {student_name}")
+        
+        # Generate automatic registration number
+        reg_number = generate_registration_number()
+        print(f"Generated registration number: {reg_number}")
+
+        # Save uploaded photo
+        photo_extension = photo.filename.split('.')[-1]
+        photo_filename = f"{student_name.replace(' ', '_')}_photo.{photo_extension}"
+        photo_path = os.path.join(UPLOAD_FOLDER, photo_filename)
+
+        with open(photo_path, "wb") as buffer:
+            shutil.copyfileobj(photo.file, buffer)
+        print(f"Photo saved to: {photo_path}")
+
+        # Save passport photo if provided
+        passport_photo_path = None
+        if passport_photo:
+            passport_extension = passport_photo.filename.split('.')[-1]
+            passport_filename = f"{student_name.replace(' ', '_')}_passport.{passport_extension}"
+            passport_photo_path = os.path.join(UPLOAD_FOLDER, passport_filename)
+
+            with open(passport_photo_path, "wb") as buffer:
+                shutil.copyfileobj(passport_photo.file, buffer)
+
+        # Save signature if provided
+        signature_path = None
+        if signature:
+            signature_extension = signature.filename.split('.')[-1]
+            signature_filename = f"{student_name.replace(' ', '_')}_signature.{signature_extension}"
+            signature_path = os.path.join(UPLOAD_FOLDER, signature_filename)
+
+            with open(signature_path, "wb") as buffer:
+                shutil.copyfileobj(signature.file, buffer)
+
+        ENROLLMENT_STATUS[reg_number] = {
+            "status": "processing",
+            "registration_number": reg_number,
+            "student_name": student_name,
+            "student_email": email,
+            "message": "Your enrollment is being processed"
+        }
+
+        background_tasks.add_task(
+            process_enrollment_task,
+            reg_number,
+            student_name,
+            date_of_birth,
+            gender,
+            nationality,
+            father_name,
+            mother_name,
+            parent_mobile,
+            email,
+            age,
+            photo_path,
+            village,
+            post_office,
+            district,
+            state,
+            pincode,
+            passport_photo_path,
+            mobile,
+            contact_email,
+            emergency_name,
+            emergency_mobile,
+            emergency_relation,
+            qualification,
+            board_college,
+            passing_year,
+            signature_path,
+        )
+
+        print(f"Enrollment accepted for processing: {reg_number}")
+        return {
+            "status": "processing",
+            "message": "Your enrollment is being processed",
+            "registration_number": reg_number
+        }
+
+    except Exception as e:
+
+        print("ERROR in enrollment process:", e)
+        import traceback
+        traceback.print_exc()
+
+        return {
+            "status": "error",
+            "message": str(e)
+        }
+
+
+@app.get("/enrollment-status/{registration_number}")
+def get_enrollment_status(registration_number: str):
+    status = ENROLLMENT_STATUS.get(registration_number)
+    if not status:
+        raise HTTPException(status_code=404, detail="Registration not found")
+    return status
+
+
+@app.get("/download-pdf/{pdf_filename}")
+def download_pdf(pdf_filename: str):
+    """
+    Download PDF by filename
+    """
+    pdf_path = os.path.join(PDF_FOLDER, pdf_filename)
+    print(f"PDF download request for: {pdf_filename}")
+    print(f"Looking for PDF at: {pdf_path}")
+    
+    if not os.path.exists(pdf_path):
+        print(f"PDF not found at: {pdf_path}")
+        print(f"Available PDFs in folder: {os.listdir(PDF_FOLDER) if os.path.exists(PDF_FOLDER) else 'Folder not found'}")
+        raise HTTPException(status_code=404, detail="PDF not found")
+    
+    print(f"PDF found, serving file")
+    return FileResponse(
+        path=pdf_path,
+        filename=pdf_filename,
+        media_type="application/pdf"
+    )
+
+
+# ------------------------------------
+# Verify Certificate
+# ------------------------------------
+
+@app.get("/api/verify/{certificate_id}")
+def verify_certificate(
+    certificate_id: str,
+    db: Session = Depends(get_db)
+):
+    certificate = (
+        db.query(Certificate)
+        .filter(
+            Certificate.certificate_id == certificate_id
+        )
+        .first()
+    )
+
+    if certificate is None:
+        raise HTTPException(
+            status_code=404,
+            detail="Certificate Not Found"
+        )
+
+    return {
+        "certificate_id": certificate.certificate_id,
+        "student_name": certificate.student_name,
+        "father_name": certificate.father_name,
+        "course": certificate.course,
+        "duration": certificate.duration,
+        "issue_date": certificate.issue_date,
+        "status": certificate.status,
+        "certificate_url": f"{BASE_URL}/certificates/{certificate.certificate}"
+    }
+
+
+# ------------------------------------
+# Add Certificate (Admin)
+# ------------------------------------
+
+@app.post("/api/admin/add-certificate")
+def add_certificate(
+    certificate_id: str = Form(...),
+    student_name: str = Form(...),
+    father_name: str = Form(...),
+    course: str = Form(...),
+    duration: str = Form(...),
+    issue_date: str = Form(...),
+    status: str = Form("Valid"),
+    certificate: str = Form(...),
+    db: Session = Depends(get_db)
+):
+    # Check if certificate already exists
+    existing = db.query(Certificate).filter(
+        Certificate.certificate_id == certificate_id
+    ).first()
+    
+    if existing:
+        return {"status": "error", "message": "Certificate ID already exists"}
+    
+    # Create new certificate
+    new_certificate = Certificate(
+        certificate_id=certificate_id,
+        student_name=student_name,
+        father_name=father_name,
+        course=course,
+        duration=duration,
+        issue_date=issue_date,
+        status=status,
+        certificate=certificate
+    )
+    
+    db.add(new_certificate)
+    db.commit()
+    db.refresh(new_certificate)
+    
+    return {
+        "status": "success",
+        "message": "Certificate added successfully",
+        "certificate": {
+            "certificate_id": new_certificate.certificate_id,
+            "student_name": new_certificate.student_name
+        }
+    }
+
+
+# ------------------------------------
+# List All Certificates (Admin)
+# ------------------------------------
+
+@app.get("/api/admin/certificates")
+def list_certificates(db: Session = Depends(get_db)):
+    certificates = db.query(Certificate).all()
+    return {
+        "certificates": [
+            {
+                "certificate_id": cert.certificate_id,
+                "student_name": cert.student_name,
+                "course": cert.course,
+                "status": cert.status,
+                "issue_date": cert.issue_date
+            }
+            for cert in certificates
+        ]
+    }
+
+
+# ------------------------------------
+# Certificate Statistics (Admin)
+# ------------------------------------
+
+@app.get("/api/certificates/stats")
+def get_statistics(db: Session = Depends(get_db)):
+    certificates = db.query(Certificate).all()
+    
+    return {
+        "total_students": len(certificates),
+        "total_certificates": len(certificates),
+        "total_pdfs": len(certificates)
+    }
+
+
+# ------------------------------------
+# Get All Certificates (Admin - Public)
+# ------------------------------------
+
+@app.get("/api/certificates")
+def get_all_certificates(db: Session = Depends(get_db)):
+    certificates = db.query(Certificate).all()
+    return [
+        {
+            "certificate_id": cert.certificate_id,
+            "student_name": cert.student_name,
+            "father_name": cert.father_name,
+            "course": cert.course,
+            "duration": cert.duration,
+            "issue_date": cert.issue_date,
+            "status": cert.status,
+            "certificate": cert.certificate
+        }
+        for cert in certificates
+    ]
+
+
+# ------------------------------------
+# Upload Certificate (Admin)
+# ------------------------------------
+
+@app.post("/api/certificates/upload")
+def upload_certificate(
+    certificate_id: str = Form(...),
+    student_name: str = Form(...),
+    father_name: str = Form(...),
+    course: str = Form(...),
+    duration: str = Form(...),
+    issue_date: str = Form(...),
+    certificate_file: UploadFile = File(...),
+    db: Session = Depends(get_db)
+):
+    # Check if certificate already exists
+    existing = db.query(Certificate).filter(
+        Certificate.certificate_id == certificate_id
+    ).first()
+    
+    if existing:
+        raise HTTPException(
+            status_code=400,
+            detail="Certificate ID already exists"
+        )
+    
+    # Save PDF file to certificates folder
+    file_extension = certificate_file.filename.split('.')[-1]
+    if file_extension.lower() != 'pdf':
+        raise HTTPException(
+            status_code=400,
+            detail="Only PDF files are allowed"
+        )
+    
+    pdf_filename = f"{certificate_id}.pdf"
+    pdf_path = os.path.join(CERTIFICATES_FOLDER, pdf_filename)
+    
+    with open(pdf_path, "wb") as buffer:
+        shutil.copyfileobj(certificate_file.file, buffer)
+    
+    # Create new certificate record
+    new_certificate = Certificate(
+        certificate_id=certificate_id,
+        student_name=student_name,
+        father_name=father_name,
+        course=course,
+        duration=duration,
+        issue_date=issue_date,
+        status="Active",
+        certificate=pdf_filename
+    )
+    
+    db.add(new_certificate)
+    db.commit()
+    db.refresh(new_certificate)
+    
+    return {
+        "status": "success",
+        "message": "Certificate uploaded successfully",
+        "certificate": {
+            "certificate_id": new_certificate.certificate_id,
+            "student_name": new_certificate.student_name
+        }
+    }
+
+
+# ------------------------------------
+# Delete Certificate (Admin)
+# ------------------------------------
+
+@app.delete("/api/certificates/{certificate_id}")
+def delete_certificate(
+    certificate_id: str,
+    db: Session = Depends(get_db)
+):
+    certificate = db.query(Certificate).filter(
+        Certificate.certificate_id == certificate_id
+    ).first()
+    
+    if certificate is None:
+        raise HTTPException(
+            status_code=404,
+            detail="Certificate Not Found"
+        )
+    
+    # Delete PDF file if exists
+    pdf_path = os.path.join(CERTIFICATES_FOLDER, certificate.certificate)
+    if os.path.exists(pdf_path):
+        os.remove(pdf_path)
+    
+    # Delete from database
+    db.delete(certificate)
+    db.commit()
+    
+    return {
+        "status": "success",
+        "message": "Certificate deleted successfully"
+    }
+
+
+# ------------------------------------
+# Search Certificates (Admin)
+# ------------------------------------
+
+@app.get("/api/certificates/search")
+def search_certificates(
+    q: str,
+    db: Session = Depends(get_db)
+):
+    search_term = f"%{q}%"
+    certificates = db.query(Certificate).filter(
+        (Certificate.certificate_id.like(search_term)) |
+        (Certificate.student_name.like(search_term))
+    ).all()
+    
+    return [
+        {
+            "certificate_id": cert.certificate_id,
+            "student_name": cert.student_name,
+            "father_name": cert.father_name,
+            "course": cert.course,
+            "duration": cert.duration,
+            "issue_date": cert.issue_date,
+            "status": cert.status,
+            "certificate": cert.certificate
+        }
+        for cert in certificates
+    ]
