@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+sqlalchemy
+psycopg2-binary
+python-multipart
+python-dotenv
+reportlab
+pillow
+pillow-heif
+sendgrid
+pytz
