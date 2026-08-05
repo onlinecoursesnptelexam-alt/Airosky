@@ -1,0 +1,38 @@
+﻿# Environment variables
+.env
+credentials.json
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+
+# Generated files
+backend/uploads/*
+backend/generated_pdfs/*
+!backend/uploads/.gitkeep
+!backend/generated_pdfs/.gitkeep
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.log
+frontend_*.zip
